@@ -1,0 +1,37 @@
+/* Responsive review navigation and touch controls */
+html { scroll-padding-block-start: var(--review-offset, 7rem); }
+:focus-visible { outline: 2px solid #ffc36c; outline-offset: 2px; }
+button, a[href] { min-height: 24px; }
+a[href]:where(:not(.hidden)) { align-content: center; }
+a[href]:where(:not([class*="flex"]):not(.hidden)) { display: inline-block; }
+input, select, textarea, .flex-grow, .flex-1 { min-width: 0; max-width: 100%; }
+body > aside nav, body > header nav { max-width: 100%; min-width: 0; overflow-x: auto; }
+body > aside nav a, body > header nav a { flex: none; }
+#c2-demo-results .dark-card-interactive > .flex-grow { min-width: 0; }
+#c2-demo-results .dark-card-interactive > .aspect-\[16\/9\] { align-self: center; }
+#c1-video-modal { overflow-y: auto; }
+#c1-video-modal video { max-height: 54dvh; max-width: 100%; margin-inline: auto; }
+@media (max-width: 1024px) {
+  a[href], button, select, input:not([type=checkbox]):not([type=radio]):not([type=range]) { min-height: 44px; }
+  textarea, input:not([type=checkbox]):not([type=radio]), select { font-size: 16px; }
+  body > aside nav { flex-wrap: nowrap; }
+  section .flex.justify-between:not(.absolute):not(.flex-col) { flex-wrap: wrap; }
+}
+@media (max-width: 639px) {
+  #screen-04 .flex:has(> input[type=text]) { flex-direction: column; }
+  #screen-02 nav { display: flex; flex-wrap: wrap; gap: 8px; }
+  #screen-02 nav a { display: inline-flex; align-items: center; }
+  #screen-02 .flex:has(> nav) { flex-wrap: wrap; }
+  #screen-02 .flex:has(> .flex > nav) { flex-wrap: wrap; }
+  section[id^=concept] nav { gap: 12px; flex-wrap: wrap; }
+  section[id^=concept] header { flex-wrap: wrap; gap: 8px; }
+  p[class*="text-[10px]"], p[class*="text-[11px]"] { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+@media (max-width: 639px) {
+  #concept-3 [class~="aspect-[16/10]"] { aspect-ratio: auto; width: 100%; min-height: 340px; }
+  #screen-07 [class~="aspect-[9/16]"] > .p-5 { padding: 8px; }
+}

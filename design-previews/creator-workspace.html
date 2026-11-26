@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Namaste Video V1 — Product Design Review &amp; Interface Specification</title>
+  <link rel="stylesheet" href="preview-utilities.css">
+  
+  <style>
+    /* Custom scrollbar & crisp line aesthetics */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0A0A0B; }
+    ::-webkit-scrollbar-thumb { background: #27272A; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3F3F46; }
+    
+    .amber-btn {
+      background-color: #E58C33;
+      color: #241507;
+      font-weight: 600;
+      transition: all 0.15s ease-in-out;
+    }
+    .amber-btn:hover {
+      background-color: #F09B42;
+      transform: translateY(-1px);
+    }
+    .amber-btn:active {
+      transform: translateY(0);
+    }
+
+    .specimen-frame {
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.06);
+    }
+  </style>
+<link rel="stylesheet" href="responsive-review.css"></head>
+<body class="bg-[#0A0A0B] text-[#F7F5F0] font-sans antialiased selection:bg-[#E58C33] selection:text-[#241507]">
+
+  <!-- TOP REVIEW BAR (ANCHOR CONTENTS BAR OUTSIDE THE APP) -->
+  <header class="sticky top-0 z-50 bg-[#0A0A0B]/95 backdrop-blur-md border-b border-[#27272A] px-4 py-3">
+    <div class="max-w-[1440px] mx-auto flex flex-col xl:flex-row xl:items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-7 h-7 rounded-full bg-[#E58C33] flex items-center justify-center text-[#241507] font-bold text-xs">
+          ▶
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-sm font-bold tracking-tight text-[#F7F5F0]">Namaste Video</span>
+            <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-[#27272A] text-[#E58C33] font-semibold">V1 Pilot Suite</span>
+          </div>
+          <p class="text-xs text-[#A4A4A6]">11 Visible Interface Specimen Chapters &bull; Single Private Workspace</p>
+        </div>
+      </div>
+
+      <!-- Quick Chapter Links -->
+      <nav class="flex items-center gap-1.5 overflow-x-auto pb-1 xl:pb-0 text-xs no-scrollbar">
+        <a href="#screen-01" class="px-2.5 py-1 rounded bg-[#18181B] hover:bg-[#27272A] text-[#A4A4A6] hover:text-[#F7F5F0] transition whitespace-nowrap">01 Sign in</a>
+        <a href="#screen-02" class="px-2.5 py-1 rounded bg-[#18181B] hover:bg-[#27272A] text-[#A4A4A6] hover:text-[#F7F5F0] transition whitespace-nowrap">02 Projects</a>
+        <a href="#screen-03" class="px-2.5 py-1 rounded bg-[#18181B] hover:bg-[#27272A] text-[#A4A4A6] hover:text-[#F7F5F0] transition whitespace-nowrap">03 Create Project</a>
+        <a href="#screen-04" class="px-2.5 py-1 rounded bg-[#18181B] hover:bg-[#27272A] text-[#A4A4A6] hover:text-[#F7F5F0] transition whitespace-nowrap">04 Storyboard</a>
+        <a href="#screen-05" class="px-2.5 py-1 rounded bg-[#18181B] hover:bg-[#27272A] text-[#A4A4A6] hover:text-[#F7F5F0] transition whitespace-nowrap">05 Review Changes</a>
+        <a href="#screen-06" class="px-2.5 py-1 rounded bg-[#18181B] hover:bg-[#27272A] text-[#A4A4A6] hover:text-[#F7F5F0] transition whitespace-nowrap">06 Generation</a>
+        <a href="#screen-07" class="px-2.5 py-1 rounded bg-[#18181B] hover:bg-[#27272A] text-[#A4A4A6] hover:text-[#F7F5F0] transition whitespace-nowrap">07 Review Video</a>
+        <a href="#screen-08" class="px-2.5 py-1 rounded bg-[#18181B] hover:bg-[#27272A] text-[#A4A4A6] hover:text-[#F7F5F0] transition whitespace-nowrap">08 Publish</a>
+        <a href="#screen-09" class="px-2.5 py-1 rounded bg-[#18181B] hover:bg-[#27272A] text-[#A4A4A6] hover:text-[#F7F5F0] transition whitespace-nowrap">09 Activity</a>
+        <a href="#screen-10" class="px-2.5 py-1 rounded bg-[#18181B] hover:bg-[#27272A] text-[#A4A4A6] hover:text-[#F7F5F0] transition whitespace-nowrap">10 Voice</a>
+        <a href="#screen-11" class="px-2.5 py-1 rounded bg-[#18181B] hover:bg-[#27272A] text-[#A4A4A6] hover:text-[#F7F5F0] transition whitespace-nowrap">11 Instagram</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN REVIEW CONTAINER -->
+  <main class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-28">
+
+    <!-- INTRO HEADER -->
+    <div class="border-b border-[#27272A] pb-8 pt-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#18181B] border border-[#27272A] text-xs font-mono text-[#E58C33] mb-4">
+        <span>Pilot Specimen Review</span>
+        <span class="text-[#71717A]">&bull;</span>
+        <span>60–90s Vertical Narrated Education</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-[#F7F5F0]">Namaste Video V1 Production Blueprint</h1>
+      <p class="text-base text-[#A4A4A6] max-w-3xl mt-3 leading-relaxed">
+        Full-fidelity review of all 11 foundational screens. Pure black palette, warm-white typography, amber-orange single focal actions (<code class="text-[#E58C33] font-mono text-xs">#E58C33</code> on <code class="text-[#E58C33] font-mono text-xs">#241507</code> text), realistic control density, custom vector water-cycle artwork, and inline edge-state recoveries.
+      </p>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- SCREEN 01: SIGN IN -->
+    <!-- ========================================================================= -->
+    <section id="screen-01" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-[#27272A] pb-4 gap-2">
+        <div>
+          <span class="text-xs font-mono uppercase text-[#E58C33] font-semibold tracking-wider">Screen 01 &bull; Specimen</span>
+          <h2 class="text-2xl font-bold text-[#F7F5F0] mt-1">Sign In &amp; Access Gate</h2>
+          <p class="text-sm text-[#A4A4A6]">Google Workspace OAuth gate for the invite-only internal pilot. No public signup or marketing pitch.</p>
+        </div>
+        <div class="text-xs text-[#71717A] font-mono">Anchor: #screen-01 &bull; Desktop modal view</div>
+      </div>
+
+      <!-- Specimen Container -->
+      <div class="specimen-frame bg-[#121214] border border-[#27272A] rounded-2xl overflow-hidden">
+        <!-- App Shell Mockup Bar -->
+        <div class="px-6 py-4 border-b border-[#27272A] flex items-center justify-between bg-[#0A0A0B]">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-[#E58C33] inline-block"></span>
+            <span class="font-bold text-sm tracking-tight text-[#F7F5F0]">Namaste Video</span>
+            <span class="text-xs text-[#71717A] ml-2">Private Pilot</span>
+          </div>
+          <div class="text-xs text-[#A4A4A6] font-mono">Single workspace per account</div>
+        </div>
+
+        <!-- Specimen Body -->
+        <div class="p-8 sm:p-16 max-w-md mx-auto text-center space-y-8">
+          <div class="space-y-2">
+            <div class="w-12 h-12 rounded-xl bg-[#18181B] border border-[#27272A] mx-auto flex items-center justify-center text-[#E58C33] font-bold text-lg mb-4">
+              ▶
+            </div>
+            <h3 class="text-xl font-bold text-[#F7F5F0]">Sign in to your private workspace</h3>
+            <p class="text-xs text-[#A4A4A6] leading-relaxed">
+              Namaste Video is currently restricted to invited pilot creators. Continue with your approved Google identity.
+            </p>
+          </div>
+
+          <!-- Focal Action -->
+          <div class="space-y-3">
+            <button class="w-full flex items-center justify-center gap-3 px-5 py-3 rounded-full bg-[#F7F5F0] text-[#0A0A0B] text-sm font-semibold hover:bg-white transition shadow-sm">
+              <svg class="w-4 h-4" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+              </svg>
+              <span>Continue with Google</span>
+            </button>
+            <div class="text-[11px] text-[#71717A]">
+              Access restricted to registered emails &bull; @pilot.namaste.internal
+            </div>
+          </div>
+
+          <!-- INLINE EDGE CASES -->
+          <div class="pt-6 border-t border-[#27272A] space-y-3 text-left">
+            <div class="text-[11px] uppercase tracking-wider font-mono text-[#A4A4A6] mb-1">Simulated Edge States &bull; Recovery</div>
+            
+            <!-- Edge 1: Wrong account -->
+            <div class="p-3 rounded-lg bg-[#18181B] border border-[#27272A] text-xs flex items-start gap-2.5">
+              <span class="text-[#E58C33] text-sm leading-none mt-0.5">⚠</span>
+              <div class="flex-1">
+                <span class="font-medium text-[#F7F5F0]">account@personal.com</span> is not on the invited creator list.
+                <div class="mt-1.5 flex items-center gap-3">
+                  <button class="text-[11px] text-[#E58C33] hover:underline font-medium">Switch Google account</button>
+                  <span class="text-[#3F3F46]">&bull;</span>
+                  <button class="text-[11px] text-[#A4A4A6] hover:underline">Request pilot invite</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Edge 2: Expired Session -->
+            <div class="p-3 rounded-lg bg-[#18181B] border border-[#27272A] text-xs flex items-start gap-2.5">
+              <span class="text-[#71717A] text-sm leading-none mt-0.5">⏱</span>
+              <div class="flex-1">
+                Your session expired while working on <strong class="text-[#F7F5F0]">"The water cycle"</strong>.
+                <div class="mt-1 flex items-center justify-between">
+                  <span class="text-[11px] text-[#A4A4A6]">Local draft safely preserved.</span>
+                  <button class="text-[11px] text-[#E58C33] font-medium hover:underline">Sign back in</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Edge 3: Missing/private project fallback -->
+            <div class="p-3 rounded-lg bg-[#18181B] border border-[#27272A] text-xs flex items-start gap-2.5">
+              <span class="text-[#71717A] text-sm leading-none mt-0.5">🔒</span>
+              <div class="flex-1">
+                Project link belongs to another private workspace or was removed.
+                <div class="mt-1">
+                  <button class="text-[11px] text-[#E58C33] font-medium hover:underline">Return to your private projects</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- SCREEN 02: PROJECTS DASHBOARD -->
+    <!-- ========================================================================= -->
+    <section id="screen-02" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-[#27272A] pb-4 gap-2">
+        <div>
+          <span class="text-xs font-mono uppercase text-[#E58C33] font-semibold tracking-wider">Screen 02 &bull; Specimen</span>
+          <h2 class="text-2xl font-bold text-[#F7F5F0] mt-1">Projects Library &amp; Video Inventory</h2>
+          <p class="text-sm text-[#A4A4A6]">Personal library showing simultaneous draft, render, and scheduled versions in unified cards.</p>
+        </div>
+        <div class="text-xs text-[#71717A] font-mono">Anchor: #screen-02 &bull; Workspace view</div>
+      </div>
+
+      <div class="specimen-frame bg-[#121214] border border-[#27272A] rounded-2xl overflow-hidden">
+        <!-- Unified App Header -->
+        <div class="px-6 py-3.5 border-b border-[#27272A] flex items-center justify-between bg-[#0A0A0B]">
+          <div class="flex items-center gap-6">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-[#E58C33]"></span>
+              <span class="font-bold text-sm text-[#F7F5F0]">Namaste Video</span>
+            </div>
+            <nav class="hidden sm:flex items-center gap-4 text-xs font-medium text-[#A4A4A6]">
+              <a href="#screen-02" class="text-[#F7F5F0] border-b border-[#E58C33] pb-1">Projects</a>
+              <a href="#screen-09" class="hover:text-[#F7F5F0] transition pb-1">Activity</a>
+              <a href="#screen-10" class="hover:text-[#F7F5F0] transition pb-1">Voice Settings</a>
+              <a href="#screen-11" class="hover:text-[#F7F5F0] transition pb-1">Instagram Account</a>
+            </nav>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-xs font-mono text-[#A4A4A6] hidden sm:inline">meera@workspace</span>
+            <div class="w-7 h-7 rounded-full bg-[#27272A] border border-[#3F3F46] flex items-center justify-center text-xs font-bold text-[#F7F5F0]">
+              M
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Content -->
+        <div class="p-6 sm:p-8 space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h3 class="text-xl font-bold text-[#F7F5F0]">Your Video Projects</h3>
+              <p class="text-xs text-[#A4A4A6] mt-0.5">3 active projects in your private workspace</p>
+            </div>
+            <a href="#screen-03" class="amber-btn inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs self-start sm:self-auto">
+              <span class="text-base leading-none font-bold">+</span>
+              <span>Create project</span>
+            </a>
+          </div>
+
+          <!-- Video Project Cards / Rows -->
+          <div class="grid grid-cols-1 gap-4">
+            
+            <!-- Project 1: Multi-state complex row (Older v1 scheduled, v2 ready, newer draft saved) -->
+            <div class="bg-[#18181B] border border-[#27272A] hover:border-[#3F3F46] rounded-xl p-4 sm:p-5 transition flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+              <div class="flex items-start gap-4">
+                <!-- Thumbnail with Educational Illustration -->
+                <div class="w-20 h-28 sm:w-24 sm:h-32 rounded-lg bg-[#0A0A0B] border border-[#27272A] relative overflow-hidden flex-shrink-0 flex items-center justify-center">
+                  <!-- Vector Water Cycle mini artwork -->
+                  <svg viewBox="0 0 100 133" class="w-full h-full object-cover opacity-85">
+                    <rect width="100" height="133" fill="#0C131F" />
+                    <!-- Ocean -->
+                    <path d="M0 105 Q 25 100, 50 105 T 100 105 L 100 133 L 0 133 Z" fill="#0F3854" />
+                    <!-- Ghats Mountain -->
+                    <path d="M20 105 L 60 55 L 85 85 L 100 70 L 100 105 Z" fill="#1C2E2A" />
+                    <!-- Condensation cloud -->
+                    <ellipse cx="65" cy="40" rx="22" ry="12" fill="#3D4B5C" />
+                    <!-- Rain streaks -->
+                    <line x1="55" y1="56" x2="52" y2="70" stroke="#7DD3FC" stroke-width="1.5" stroke-dasharray="2 2" />
+                    <line x1="68" y1="56" x2="65" y2="72" stroke="#7DD3FC" stroke-width="1.5" stroke-dasharray="2 2" />
+                  </svg>
+                  <span class="absolute bottom-1.5 right-1.5 px-1.5 py-0.5 bg-black/80 rounded text-[9px] font-mono text-[#F7F5F0]">1:18</span>
+                </div>
+
+                <div class="space-y-2">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <h4 class="text-base font-bold text-[#F7F5F0]">See where a raindrop goes (The Water Cycle)</h4>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#27272A] text-[#A4A4A6] font-mono">v2.1 Draft</span>
+                  </div>
+                  <p class="text-xs text-[#A4A4A6] line-clamp-1">Solar energy warms ocean surface layers; vapour begins its inland ascent over Western Ghats.</p>
+                  
+                  <!-- Three parallel version states -->
+                  <div class="flex flex-wrap items-center gap-2 pt-1">
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#202024] border border-[#27272A] text-[11px] text-[#A4A4A6]">
+                      <span class="w-1.5 h-1.5 rounded-full bg-[#E58C33]"></span>
+                      <span>Draft saved (4 mins ago)</span>
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#202024] border border-[#27272A] text-[11px] text-[#10B981]">
+                      <span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span>
+                      <span>v2 ready (1080p MP4)</span>
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#202024] border border-[#27272A] text-[11px] text-[#0EA5E9]">
+                      <span class="w-1.5 h-1.5 rounded-full bg-[#0EA5E9]"></span>
+                      <span>v1 scheduled: Today 18:30 IST</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2.5 self-end lg:self-center">
+                <a href="#screen-04" class="px-3.5 py-1.5 rounded-full bg-[#27272A] hover:bg-[#3F3F46] text-xs font-medium text-[#F7F5F0] transition">
+                  Edit Storyboard
+                </a>
+                <a href="#screen-07" class="amber-btn px-4 py-1.5 rounded-full text-xs font-semibold">
+                  Review v2 Video
+                </a>
+              </div>
+            </div>
+
+            <!-- Project 2: Render in progress state -->
+            <div class="bg-[#18181B] border border-[#27272A] rounded-xl p-4 sm:p-5 flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+              <div class="flex items-start gap-4">
+                <div class="w-20 h-28 sm:w-24 sm:h-32 rounded-lg bg-[#0A0A0B] border border-[#27272A] relative overflow-hidden flex-shrink-0 flex items-center justify-center">
+                  <svg viewBox="0 0 100 133" class="w-full h-full opacity-60">
+                    <rect width="100" height="133" fill="#141118" />
+                    <circle cx="50" cy="55" r="28" fill="#382618" />
+                    <path d="M20 120 Q 50 80, 80 120 Z" fill="#241B26" />
+                  </svg>
+                  <div class="absolute inset-0 bg-black/60 flex items-center justify-center">
+                    <div class="w-5 h-5 border-2 border-[#E58C33] border-t-transparent rounded-full animate-spin"></div>
+                  </div>
+                </div>
+                <div class="space-y-1.5">
+                  <div class="flex items-center gap-2">
+                    <h4 class="text-base font-bold text-[#F7F5F0]">Why does it rain after a hot afternoon?</h4>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#E58C33]/15 text-[#E58C33] font-mono border border-[#E58C33]/30">Rendering 68%</span>
+                  </div>
+                  <p class="text-xs text-[#A4A4A6]">Thermal energy buildup and convective downburst dynamics.</p>
+                  <p class="text-[11px] text-[#71717A]">Step 4 of 6: Synthesizing natural Indian-English voiceover &bull; 1:14 duration</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2 self-end lg:self-center">
+                <a href="#screen-06" class="px-3.5 py-1.5 rounded-full bg-[#27272A] hover:bg-[#3F3F46] text-xs font-medium text-[#F7F5F0] transition">
+                  View Live Progress
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- SUB-SPECIMEN: EMPTY STATE & RETRY STATE -->
+          <div class="pt-6 border-t border-[#27272A]">
+            <span class="text-[11px] uppercase tracking-wider font-mono text-[#A4A4A6]">Specimen Sub-State &bull; First-time Empty &amp; Network Recovery</span>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+              <!-- Empty State -->
+              <div class="p-6 rounded-xl bg-[#0A0A0B] border border-dashed border-[#27272A] text-center space-y-3">
+                <div class="w-10 h-10 rounded-full bg-[#18181B] mx-auto flex items-center justify-center text-[#A4A4A6]">✦</div>
+                <div>
+                  <h5 class="text-sm font-bold text-[#F7F5F0]">No video projects yet</h5>
+                  <p class="text-xs text-[#A4A4A6] mt-1 max-w-xs mx-auto">Start with a science topic or curious question to generate your first vertical explainer.</p>
+                </div>
+                <div class="flex items-center justify-center gap-2 pt-1">
+                  <a href="#screen-03" class="amber-btn px-3.5 py-1.5 rounded-full text-xs font-medium">+ Create project</a>
+                  <a href="#screen-11" class="px-3 py-1.5 rounded-full bg-[#18181B] text-xs text-[#A4A4A6] hover:text-[#F7F5F0]">Connect Instagram</a>
+                </div>
+              </div>
+
+              <!-- Loading & Retry State -->
+              <div class="p-6 rounded-xl bg-[#0A0A0B] border border-[#27272A] flex flex-col justify-center space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-mono text-[#A4A4A6]">Library sync failed</span>
+                  <span class="text-[10px] text-[#F43F5E] bg-[#F43F5E]/10 px-2 py-0.5 rounded">HTTP 503 Gateway</span>
+                </div>
+                <p class="text-xs text-[#A4A4A6]">Unable to reach your private workspace store. 1 unrendered draft remains safe in browser cache.</p>
+                <div class="flex items-center gap-3 pt-1">
+                  <button class="px-3.5 py-1.5 rounded-full bg-[#27272A] hover:bg-[#3F3F46] text-xs font-semibold text-[#F7F5F0]">Retry connection</button>
+                  <span class="text-[11px] text-[#71717A]">Auto-retrying in 8s...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- SCREEN 03: CREATE PROJECT -->
+    <!-- ========================================================================= -->
+    <section id="screen-03" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-[#27272A] pb-4 gap-2">
+        <div>
+          <span class="text-xs font-mono uppercase text-[#E58C33] font-semibold tracking-wider">Screen 03 &bull; Specimen</span>
+          <h2 class="text-2xl font-bold text-[#F7F5F0] mt-1">Create Project &amp; Topic Briefing</h2>
+          <p class="text-sm text-[#A4A4A6]">Natural curiosity input with realistic prompt autosave, clarification prompt, and AI duration synthesis.</p>
+        </div>
+        <div class="text-xs text-[#71717A] font-mono">Anchor: #screen-03 &bull; Creation step</div>
+      </div>
+
+      <div class="specimen-frame bg-[#121214] border border-[#27272A] rounded-2xl overflow-hidden max-w-4xl mx-auto">
+        <!-- Top bar with breadcrumb -->
+        <div class="px-6 py-3.5 border-b border-[#27272A] flex items-center justify-between bg-[#0A0A0B]">
+          <div class="flex items-center gap-2 text-xs">
+            <a href="#screen-02" class="text-[#A4A4A6] hover:text-[#F7F5F0]">Projects</a>
+            <span class="text-[#3F3F46]">/</span>
+            <span class="text-[#F7F5F0] font-medium">New Topic</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+            <span class="text-[11px] text-[#A4A4A6] font-mono">Autosaved just now</span>
+          </div>
+        </div>
+
+        <div class="p-6 sm:p-10 space-y-8">
+          <div>
+            <span class="text-xs font-mono text-[#E58C33] uppercase">Curiosity Input</span>
+            <h3 class="text-2xl font-bold text-[#F7F5F0] mt-1">What would you like to explain?</h3>
+            <p class="text-xs text-[#A4A4A6] mt-1">AI selects an exact 60–90 second cadence based on the conceptual depth of your prompt.</p>
+          </div>
+
+          <!-- Prompt Form -->
+          <div class="space-y-4">
+            <div class="space-y-1.5">
+              <label class="block text-xs font-semibold text-[#F7F5F0]">Topic or raw lecture notes</label>
+              <textarea rows="4" class="w-full bg-[#0A0A0B] border border-[#27272A] focus:border-[#E58C33] rounded-xl p-3.5 text-sm text-[#F7F5F0] placeholder-[#71717A] focus:outline-none transition leading-relaxed resize-none">Why does water evaporate from the ocean, turn into heavy dark monsoon clouds over the Western Ghats, and come down as freshwater rain instead of saltwater?</textarea>
+              <div class="flex items-center justify-between text-[11px] text-[#71717A]">
+                <span>Provide a curious question, textbook paragraph, or bullet points</span>
+                <span>168 characters &bull; Validated</span>
+              </div>
+            </div>
+
+            <!-- Focused Clarification Box (AI Inquiry) -->
+            <div class="p-4 rounded-xl bg-[#18181B] border border-[#27272A] space-y-2">
+              <div class="flex items-center gap-2">
+                <span class="text-[#E58C33] text-xs">✦</span>
+                <span class="text-xs font-semibold text-[#F7F5F0]">One focused clarification</span>
+                <span class="text-[10px] text-[#A4A4A6] font-mono">(optional)</span>
+              </div>
+              <p class="text-xs text-[#A4A4A6]">Should we emphasize the thermodynamic phase change (why salt stays behind) or the geographic journey over India's coastline?</p>
+              <div class="flex flex-wrap gap-2 pt-1">
+                <button class="px-3 py-1 rounded-full bg-[#27272A] hover:bg-[#3F3F46] text-xs text-[#F7F5F0] border border-[#3F3F46]">
+                  Phase change &amp; salt separation
+                </button>
+                <button class="px-3 py-1 rounded-full bg-[#E58C33]/15 text-[#E58C33] border border-[#E58C33]/40 text-xs font-medium">
+                  ✓ Geographic coastal journey (Western Ghats)
+                </button>
+                <button class="px-3 py-1 rounded-full bg-[#27272A] hover:bg-[#3F3F46] text-xs text-[#A4A4A6]">
+                  Balanced 50/50
+                </button>
+              </div>
+            </div>
+
+            <!-- Project Voice Override & Duration -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              <div class="p-3.5 rounded-xl bg-[#0A0A0B] border border-[#27272A] space-y-1">
+                <div class="text-[11px] text-[#71717A] uppercase font-mono">Synthesized Pacing</div>
+                <div class="text-sm font-bold text-[#F7F5F0]">1:18 (78 seconds &bull; 6 visual beats)</div>
+                <div class="text-[11px] text-[#A4A4A6]">Optimal for complete conceptual retention</div>
+              </div>
+              
+              <div class="p-3.5 rounded-xl bg-[#0A0A0B] border border-[#27272A] space-y-1">
+                <div class="text-[11px] text-[#71717A] uppercase font-mono">Project Voice Override</div>
+                <div class="flex items-center justify-between">
+                  <span class="text-sm font-bold text-[#F7F5F0]">Aditi (Warm Calm)</span>
+                  <a href="#screen-10" class="text-[11px] text-[#E58C33] hover:underline">Change</a>
+                </div>
+                <div class="text-[11px] text-[#A4A4A6]">Paced at 138 words per minute</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Action -->
+          <div class="pt-4 border-t border-[#27272A] flex items-center justify-between">
+            <span class="text-xs text-[#71717A]">Step 1 of 4 &bull; Next: Storyboard sequencing</span>
+            <a href="#screen-04" class="amber-btn px-6 py-2.5 rounded-full text-xs font-semibold inline-flex items-center gap-2">
+              <span>Plan Storyboard</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- SCREEN 04: STORYBOARD -->
+    <!-- ========================================================================= -->
+    <section id="screen-04" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-[#27272A] pb-4 gap-2">
+        <div>
+          <span class="text-xs font-mono uppercase text-[#E58C33] font-semibold tracking-wider">Screen 04 &bull; Specimen</span>
+          <h2 class="text-2xl font-bold text-[#F7F5F0] mt-1">Storyboard Director &amp; Scene Tuning</h2>
+          <p class="text-sm text-[#A4A4A6]">Six ordered visual scenes totaling 78s. Scene 3 selected showing spoken cues, on-screen text, and natural language scene scoping.</p>
+        </div>
+        <div class="text-xs text-[#71717A] font-mono">Anchor: #screen-04 &bull; Director suite</div>
+      </div>
+
+      <div class="specimen-frame bg-[#121214] border border-[#27272A] rounded-2xl overflow-hidden">
+        <!-- Top controls -->
+        <div class="px-6 py-3.5 border-b border-[#27272A] flex flex-wrap items-center justify-between gap-3 bg-[#0A0A0B]">
+          <div class="flex items-center gap-3">
+            <a href="#screen-02" class="text-xs text-[#A4A4A6] hover:text-[#F7F5F0]">← Projects</a>
+            <span class="text-[#3F3F46]">|</span>
+            <span class="text-xs font-bold text-[#F7F5F0]">The Water Cycle</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[#202024] text-[#E58C33]">78s total &bull; Revision 3</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-[11px] text-[#A4A4A6] hidden sm:inline">Approved revision locked</span>
+            <a href="#screen-06" class="amber-btn px-4 py-1.5 rounded-full text-xs font-semibold">
+              Generate video (Rev 3)
+            </a>
+          </div>
+        </div>
+
+        <div class="p-6 lg:p-8 space-y-6">
+          <!-- 6 Sequential Scenes Thumbnails Strip -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono uppercase text-[#A4A4A6]">Timeline Progression &bull; 6 Scenes (78 Seconds)</span>
+              <span class="text-xs text-[#71717A]">Click scene to inspect &amp; refine</span>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+              <!-- Scene 1 -->
+              <div class="p-2.5 rounded-xl bg-[#18181B] border border-[#27272A] opacity-75 hover:opacity-100 cursor-pointer transition space-y-2">
+                <div class="aspect-[9/12] rounded bg-[#0C131F] relative overflow-hidden flex items-center justify-center">
+                  <svg viewBox="0 0 90 120" class="w-full h-full p-2">
+                    <circle cx="45" cy="35" r="16" fill="#E58C33" opacity="0.8" />
+                    <line x1="20" y1="90" x2="70" y2="90" stroke="#38BDF8" stroke-dasharray="2 2" />
+                  </svg>
+                  <span class="absolute bottom-1 right-1 text-[9px] font-mono bg-black/80 px-1 rounded text-[#F7F5F0]">0:00-0:12</span>
+                </div>
+                <div class="text-[11px] font-bold text-[#F7F5F0] truncate">1. Solar absorption</div>
+                <div class="text-[10px] text-[#71717A]">12s &bull; Arabian Sea</div>
+              </div>
+
+              <!-- Scene 2 -->
+              <div class="p-2.5 rounded-xl bg-[#18181B] border border-[#27272A] opacity-75 hover:opacity-100 cursor-pointer transition space-y-2">
+                <div class="aspect-[9/12] rounded bg-[#0C131F] relative overflow-hidden flex items-center justify-center">
+                  <svg viewBox="0 0 90 120" class="w-full h-full p-2">
+                    <path d="M25 80 Q 45 40, 65 80" stroke="#7DD3FC" stroke-width="2" fill="none" />
+                    <circle cx="45" cy="40" r="4" fill="#7DD3FC" />
+                  </svg>
+                  <span class="absolute bottom-1 right-1 text-[9px] font-mono bg-black/80 px-1 rounded text-[#F7F5F0]">0:12-0:24</span>
+                </div>
+                <div class="text-[11px] font-bold text-[#F7F5F0] truncate">2. Vapour lift</div>
+                <div class="text-[10px] text-[#71717A]">12s &bull; Desalination</div>
+              </div>
+
+              <!-- Scene 3 (SELECTED) -->
+              <div class="p-2.5 rounded-xl bg-[#202024] border-2 border-[#E58C33] cursor-pointer transition space-y-2 shadow-lg relative">
+                <div class="absolute -top-2 left-1/2 -translate-x-1/2 bg-[#E58C33] text-[#241507] text-[9px] font-bold px-1.5 py-0.2 rounded-full">
+                  ACTIVE
+                </div>
+                <div class="aspect-[9/12] rounded bg-[#101A28] relative overflow-hidden flex items-center justify-center">
+                  <svg viewBox="0 0 90 120" class="w-full h-full">
+                    <path d="M10 100 L 45 50 L 70 75 L 90 60 L 90 120 L 10 120 Z" fill="#1C2E2A" />
+                    <ellipse cx="50" cy="38" rx="25" ry="14" fill="#3D4B5C" />
+                    <text x="50" y="42" font-size="7" fill="#7DD3FC" text-anchor="middle" font-family="sans-serif">3,200m</text>
+                  </svg>
+                  <span class="absolute bottom-1 right-1 text-[9px] font-mono bg-[#E58C33] text-[#241507] font-bold px-1 rounded">0:24-0:38</span>
+                </div>
+                <div class="text-[11px] font-bold text-[#F7F5F0] truncate">3. Orographic lift</div>
+                <div class="text-[10px] text-[#E58C33]">14s &bull; Western Ghats</div>
+              </div>
+
+              <!-- Scene 4 -->
+              <div class="p-2.5 rounded-xl bg-[#18181B] border border-[#27272A] opacity-75 hover:opacity-100 cursor-pointer transition space-y-2">
+                <div class="aspect-[9/12] rounded bg-[#0C131F] relative overflow-hidden flex items-center justify-center">
+                  <svg viewBox="0 0 90 120" class="w-full h-full p-2">
+                    <ellipse cx="45" cy="40" rx="30" ry="18" fill="#273240" />
+                    <line x1="35" y1="65" x2="32" y2="85" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="2 2" />
+                    <line x1="55" y1="65" x2="52" y2="85" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="2 2" />
+                  </svg>
+                  <span class="absolute bottom-1 right-1 text-[9px] font-mono bg-black/80 px-1 rounded text-[#F7F5F0]">0:38-0:52</span>
+                </div>
+                <div class="text-[11px] font-bold text-[#F7F5F0] truncate">4. Condensation</div>
+                <div class="text-[10px] text-[#71717A]">14s &bull; Droplet fusion</div>
+              </div>
+
+              <!-- Scene 5 -->
+              <div class="p-2.5 rounded-xl bg-[#18181B] border border-[#27272A] opacity-75 hover:opacity-100 cursor-pointer transition space-y-2">
+                <div class="aspect-[9/12] rounded bg-[#0C131F] relative overflow-hidden flex items-center justify-center">
+                  <svg viewBox="0 0 90 120" class="w-full h-full p-2">
+                    <line x1="25" y1="30" x2="20" y2="90" stroke="#7DD3FC" stroke-width="2" />
+                    <line x1="45" y1="25" x2="40" y2="95" stroke="#7DD3FC" stroke-width="2" />
+                    <line x1="65" y1="35" x2="60" y2="88" stroke="#7DD3FC" stroke-width="2" />
+                  </svg>
+                  <span class="absolute bottom-1 right-1 text-[9px] font-mono bg-black/80 px-1 rounded text-[#F7F5F0]">0:52-1:04</span>
+                </div>
+                <div class="text-[11px] font-bold text-[#F7F5F0] truncate">5. Torrential rain</div>
+                <div class="text-[10px] text-[#71717A]">12s &bull; Gravity pull</div>
+              </div>
+
+              <!-- Scene 6 -->
+              <div class="p-2.5 rounded-xl bg-[#18181B] border border-[#27272A] opacity-75 hover:opacity-100 cursor-pointer transition space-y-2">
+                <div class="aspect-[9/12] rounded bg-[#0C131F] relative overflow-hidden flex items-center justify-center">
+                  <svg viewBox="0 0 90 120" class="w-full h-full p-2">
+                    <path d="M10 80 Q 45 60, 80 110" stroke="#34D399" stroke-width="3" fill="none" />
+                  </svg>
+                  <span class="absolute bottom-1 right-1 text-[9px] font-mono bg-black/80 px-1 rounded text-[#F7F5F0]">1:04-1:18</span>
+                </div>
+                <div class="text-[11px] font-bold text-[#F7F5F0] truncate">6. River runoff</div>
+                <div class="text-[10px] text-[#71717A]">14s &bull; Closed loop</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Selected Scene Inspector (Scene 3) -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 bg-[#0A0A0B] p-5 sm:p-6 rounded-xl border border-[#27272A]">
+            
+            <!-- Left: Artwork & On-screen graphic plan -->
+            <div class="lg:col-span-5 space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-[#F7F5F0]">Scene 03: Orographic Lift</span>
+                <span class="text-xs font-mono text-[#E58C33]">0:24 &rarr; 0:38 (14.0s)</span>
+              </div>
+
+              <!-- High fidelity educational illustration -->
+              <div class="aspect-[9/12] w-full max-w-[260px] mx-auto rounded-lg bg-[#0C141F] border border-[#27272A] p-3 relative overflow-hidden flex flex-col justify-between">
+                <div class="flex items-center justify-between text-[10px] font-mono text-[#7DD3FC]">
+                  <span>ALTITUDE 3,200m</span>
+                  <span>TEMP -4°C</span>
+                </div>
+
+                <!-- Custom SVG Diagram -->
+                <svg viewBox="0 0 200 240" class="w-full my-auto">
+                  <!-- Sloping Ghats Mountain -->
+                  <path d="M0 220 L 120 90 L 180 140 L 200 120 L 200 240 L 0 240 Z" fill="#1C2E2A" />
+                  <!-- Elevation Contour -->
+                  <path d="M0 220 L 120 90" stroke="#34D399" stroke-width="1.5" stroke-dasharray="3 3" />
+                  
+                  <!-- Rising warm moisture arrows -->
+                  <path d="M30 190 Q 60 140, 95 105" stroke="#E58C33" stroke-width="2.5" fill="none" marker-end="url(#arrow)" />
+                  
+                  <!-- Heavy Cloud Mass -->
+                  <ellipse cx="140" cy="80" rx="50" ry="25" fill="#3D4B5C" opacity="0.9" />
+                  <ellipse cx="125" cy="70" rx="35" ry="20" fill="#4B5A6E" opacity="0.9" />
+
+                  <!-- Text label -->
+                  <text x="135" y="82" font-size="9" fill="#F7F5F0" font-weight="bold" text-anchor="middle">CONDENSATION LEVEL</text>
+                  <text x="45" y="150" font-size="8" fill="#E58C33" font-weight="bold">Moisture forced upward</text>
+                </svg>
+
+                <div class="text-[10px] text-center font-mono text-[#A4A4A6] bg-black/60 py-1 rounded">
+                  On-screen text: "Western Ghats Escarpment &bull; 3,200m"
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Narration, Visual Plan & Edit Scoping -->
+            <div class="lg:col-span-7 space-y-4">
+              <div class="space-y-1.5">
+                <div class="flex items-center justify-between">
+                  <label class="text-xs font-semibold text-[#F7F5F0]">Spoken Narration Script</label>
+                  <span class="text-[11px] font-mono text-[#10B981]">32 words &bull; 137 wpm (Ideal)</span>
+                </div>
+                <textarea rows="3" class="w-full bg-[#18181B] border border-[#27272A] focus:border-[#E58C33] rounded-lg p-3 text-xs text-[#F7F5F0] leading-relaxed resize-none">As moisture-laden marine air hits the Western Ghats escarpment, it is forced rapidly upward into sub-zero altitudes, causing invisible vapour to flash-condense into towering cumulonimbus clouds.</textarea>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <div class="p-3 rounded-lg bg-[#18181B] border border-[#27272A] space-y-1">
+                  <span class="text-[10px] font-mono uppercase text-[#71717A]">Spoken Audio Cue</span>
+                  <p class="text-[#F7F5F0] font-medium">Sync on: "...hits the Western Ghats"</p>
+                  <span class="text-[11px] text-[#A4A4A6]">Triggers camera pan across ridgeline</span>
+                </div>
+
+                <div class="p-3 rounded-lg bg-[#18181B] border border-[#27272A] space-y-1">
+                  <span class="text-[10px] font-mono uppercase text-[#71717A]">On-Screen Overlay</span>
+                  <p class="text-[#F7F5F0] font-medium">"Altitude 3,200m &bull; Orographic Lift"</p>
+                  <span class="text-[11px] text-[#A4A4A6]">Centered in Instagram Safe Area</span>
+                </div>
+              </div>
+
+              <!-- Natural Language Edit Scope Box -->
+              <div class="p-3.5 rounded-lg bg-[#18181B] border border-[#27272A] space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-semibold text-[#E58C33]">Natural-Language Revision Instruction</span>
+                  <!-- Scope Toggle -->
+                  <div class="inline-flex rounded-md p-0.5 bg-[#0A0A0B] border border-[#27272A] text-[10px]">
+                    <button class="px-2 py-0.5 rounded bg-[#E58C33] text-[#241507] font-bold">This scene only</button>
+                    <button class="px-2 py-0.5 rounded text-[#A4A4A6] hover:text-[#F7F5F0]">All 6 scenes</button>
+                  </div>
+                </div>
+                <div class="flex gap-2">
+                  <input type="text" value="Emphasize that the clouds drop temperature by 6.5 degrees Celsius per kilometer" class="flex-1 bg-[#0A0A0B] border border-[#27272A] rounded-md px-3 py-1.5 text-xs text-[#F7F5F0] focus:outline-none focus:border-[#E58C33]">
+                  <a href="#screen-05" class="px-3 py-1.5 rounded-md bg-[#27272A] hover:bg-[#3F3F46] text-xs font-semibold text-[#F7F5F0] transition whitespace-nowrap">
+                    Review Diff
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- SCREEN 05: REVIEW CHANGES & DIFF -->
+    <!-- ========================================================================= -->
+    <section id="screen-05" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-[#27272A] pb-4 gap-2">
+        <div>
+          <span class="text-xs font-mono uppercase text-[#E58C33] font-semibold tracking-wider">Screen 05 &bull; Specimen</span>
+          <h2 class="text-2xl font-bold text-[#F7F5F0] mt-1">Review Changes, Diff &amp; Conflict Recovery</h2>
+          <p class="text-sm text-[#A4A4A6]">Precise side-by-side wording diff, updated scene visuals, autosave conflict resolution, and offline recovery.</p>
+        </div>
+        <div class="text-xs text-[#71717A] font-mono">Anchor: #screen-05 &bull; Revision diff</div>
+      </div>
+
+      <div class="specimen-frame bg-[#121214] border border-[#27272A] rounded-2xl overflow-hidden max-w-4xl mx-auto">
+        <!-- Top bar -->
+        <div class="px-6 py-3.5 border-b border-[#27272A] flex items-center justify-between bg-[#0A0A0B]">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold text-[#F7F5F0]">Review Proposed Changes</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[#E58C33]/20 text-[#E58C33]">Scene 03 Modified</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <a href="#screen-04" class="px-3 py-1 rounded-full bg-[#27272A] hover:bg-[#3F3F46] text-xs text-[#A4A4A6]">Discard</a>
+            <a href="#screen-06" class="amber-btn px-4 py-1 rounded-full text-xs font-semibold">Apply &amp; Generate Video</a>
+          </div>
+        </div>
+
+        <div class="p-6 sm:p-8 space-y-6">
+          <!-- Before vs After Wording Diff -->
+          <div class="space-y-3">
+            <h4 class="text-xs font-mono uppercase text-[#A4A4A6]">Side-by-Side Wording &amp; Artwork Comparison</h4>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Before (Rev 2) -->
+              <div class="p-4 rounded-xl bg-[#18181B] border border-[#27272A] space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-[#A4A4A6]">Current Server Baseline (Rev 2)</span>
+                  <span class="text-[10px] font-mono text-[#71717A]">32 words</span>
+                </div>
+                <div class="text-xs text-[#A4A4A6] leading-relaxed p-3 rounded bg-[#0A0A0B] border border-[#27272A]">
+                  "As moisture-laden marine air hits the Western Ghats escarpment, it is forced rapidly upward into sub-zero altitudes, causing invisible vapour to flash-condense into towering cumulonimbus clouds."
+                </div>
+                <div class="text-[11px] text-[#71717A]">On-screen cue: Altitude 3,200m</div>
+              </div>
+
+              <!-- After (Proposed Rev 3) -->
+              <div class="p-4 rounded-xl bg-[#18181B] border border-[#E58C33]/40 space-y-3 relative">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-[#E58C33]">Proposed Revision 3 (Local)</span>
+                  <span class="text-[10px] font-mono text-[#E58C33]">36 words &bull; +4 words</span>
+                </div>
+                <div class="text-xs text-[#F7F5F0] leading-relaxed p-3 rounded bg-[#0A0A0B] border border-[#E58C33]/30">
+                  "As marine air hits the Western Ghats, it climbs steeply, <mark class="bg-[#E58C33]/30 text-[#F7F5F0] px-1 rounded">dropping 6.5°C per kilometer</mark>. This rapid cooling forces invisible vapour to flash-condense into towering cumulonimbus clouds."
+                </div>
+                <div class="text-[11px] text-[#E58C33]">On-screen cue: Lapse Rate: -6.5°C / 1,000m</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- INLINE EDGE CASES: CONFLICT & OFFLINE -->
+          <div class="pt-6 border-t border-[#27272A] space-y-4">
+            <span class="text-[11px] uppercase tracking-wider font-mono text-[#A4A4A6]">Edge State Specimen &bull; Autosave Conflict &amp; Offline Cache</span>
+
+            <!-- Conflict Box -->
+            <div class="p-4 rounded-xl bg-[#0A0A0B] border border-[#F43F5E]/40 space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-[#F43F5E]"></span>
+                  <span class="text-xs font-bold text-[#F7F5F0]">Simultaneous Tab Edit Conflict Detected</span>
+                </div>
+                <span class="text-[10px] font-mono text-[#F43F5E] bg-[#F43F5E]/10 px-2 py-0.5 rounded">Conflict ID #204</span>
+              </div>
+              <p class="text-xs text-[#A4A4A6]">
+                This project was updated from another browser window 2 minutes ago. Choose which version should become the authoritative Rev 3:
+              </p>
+              <div class="flex flex-wrap items-center gap-3 pt-1">
+                <button class="px-3.5 py-1.5 rounded-full bg-[#E58C33] text-[#241507] text-xs font-bold">
+                  Keep My Local Revision ("dropping 6.5°C...")
+                </button>
+                <button class="px-3.5 py-1.5 rounded-full bg-[#27272A] text-xs text-[#F7F5F0] hover:bg-[#3F3F46]">
+                  Accept Latest Server Copy
+                </button>
+                <button class="px-3 py-1.5 text-xs text-[#A4A4A6] hover:underline">
+                  Save local as duplicate project
+                </button>
+              </div>
+            </div>
+
+            <!-- Offline Recovery Banner -->
+            <div class="p-3.5 rounded-xl bg-[#18181B] border border-[#27272A] flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2 text-[#A4A4A6]">
+                <span class="text-[#E58C33]">⚡</span>
+                <span>You are currently offline. Edits stored safely in local IndexedDB.</span>
+              </div>
+              <span class="text-[11px] font-mono text-[#71717A]">Sync resumes when reconnected</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- SCREEN 06: GENERATION PROGRESS -->
+    <!-- ========================================================================= -->
+    <section id="screen-06" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-[#27272A] pb-4 gap-2">
+        <div>
+          <span class="text-xs font-mono uppercase text-[#E58C33] font-semibold tracking-wider">Screen 06 &bull; Specimen</span>
+          <h2 class="text-2xl font-bold text-[#F7F5F0] mt-1">Generation Pipeline &amp; Stage Validation</h2>
+          <p class="text-sm text-[#A4A4A6]">Transparent 6-stage compiler (Queued &rarr; Narration &rarr; Animation &rarr; Rendering &rarr; Validating &rarr; Ready). Close safely anytime.</p>
+        </div>
+        <div class="text-xs text-[#71717A] font-mono">Anchor: #screen-06 &bull; Pipeline monitor</div>
+      </div>
+
+      <div class="specimen-frame bg-[#121214] border border-[#27272A] rounded-2xl overflow-hidden max-w-4xl mx-auto">
+        <!-- Top status bar -->
+        <div class="px-6 py-3.5 border-b border-[#27272A] flex items-center justify-between bg-[#0A0A0B]">
+          <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#E58C33] animate-pulse"></span>
+            <span class="text-xs font-bold text-[#F7F5F0]">Compiling 1080p MP4 (Revision 3)</span>
+          </div>
+          <!-- Safe to close notice -->
+          <div class="flex items-center gap-2 text-xs text-[#10B981]">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>Safe to close window &bull; Runs on server</span>
+          </div>
+        </div>
+
+        <div class="p-6 sm:p-8 space-y-8">
+          <div class="space-y-1">
+            <h3 class="text-xl font-bold text-[#F7F5F0]">Generating: See where a raindrop goes</h3>
+            <p class="text-xs text-[#A4A4A6]">Synthesizing 78-second vertical explainer across 6 educational scenes.</p>
+          </div>
+
+          <!-- 6 Sequential Pipeline Stages -->
+          <div class="space-y-3">
+            <!-- Stage 1: Queued (Done) -->
+            <div class="p-3 rounded-lg bg-[#18181B] border border-[#27272A] flex items-center justify-between text-xs">
+              <div class="flex items-center gap-3">
+                <span class="w-5 h-5 rounded-full bg-[#10B981]/20 text-[#10B981] flex items-center justify-center text-[10px] font-bold">✓</span>
+                <span class="text-[#F7F5F0] font-medium">1. Queued &amp; Resource Allocation</span>
+              </div>
+              <span class="text-[11px] font-mono text-[#71717A]">Completed in 1.4s</span>
+            </div>
+
+            <!-- Stage 2: Narration (Done) -->
+            <div class="p-3 rounded-lg bg-[#18181B] border border-[#27272A] flex items-center justify-between text-xs">
+              <div class="flex items-center gap-3">
+                <span class="w-5 h-5 rounded-full bg-[#10B981]/20 text-[#10B981] flex items-center justify-center text-[10px] font-bold">✓</span>
+                <span class="text-[#F7F5F0] font-medium">2. Spoken Narration Synthesis (Voice: Aditi)</span>
+              </div>
+              <span class="text-[11px] font-mono text-[#71717A]">Completed in 8.2s</span>
+            </div>
+
+            <!-- Stage 3: Preparing Animation (Done) -->
+            <div class="p-3 rounded-lg bg-[#18181B] border border-[#27272A] flex items-center justify-between text-xs">
+              <div class="flex items-center gap-3">
+                <span class="w-5 h-5 rounded-full bg-[#10B981]/20 text-[#10B981] flex items-center justify-center text-[10px] font-bold">✓</span>
+                <span class="text-[#F7F5F0] font-medium">3. Vector Illustration &amp; Particle Prep</span>
+              </div>
+              <span class="text-[11px] font-mono text-[#71717A]">6 scenes assembled</span>
+            </div>
+
+            <!-- Stage 4: Rendering 1080p (ACTIVE) -->
+            <div class="p-3.5 rounded-lg bg-[#202024] border border-[#E58C33] flex flex-col gap-2 text-xs">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-5 h-5 border-2 border-[#E58C33] border-t-transparent rounded-full animate-spin"></div>
+                  <span class="text-[#F7F5F0] font-bold">4. Rendering 1080x1920 MP4 Video</span>
+                </div>
+                <span class="font-mono text-[#E58C33] font-bold">68% &bull; Est. 18s left</span>
+              </div>
+              <div class="w-full bg-[#0A0A0B] h-1.5 rounded-full overflow-hidden">
+                <div class="bg-[#E58C33] h-full w-[68%] rounded-full"></div>
+              </div>
+            </div>
+
+            <!-- Stage 5: Validating (Pending) -->
+            <div class="p-3 rounded-lg bg-[#0A0A0B] border border-[#27272A] flex items-center justify-between text-xs opacity-60">
+              <div class="flex items-center gap-3">
+                <span class="w-5 h-5 rounded-full bg-[#27272A] text-[#71717A] flex items-center justify-center text-[10px]">5</span>
+                <span class="text-[#A4A4A6]">5. Validating Instagram Audio Sync &amp; Caption Safe Margins</span>
+              </div>
+              <span class="text-[11px] font-mono text-[#71717A]">Pending</span>
+            </div>
+
+            <!-- Stage 6: Ready (Pending) -->
+            <div class="p-3 rounded-lg bg-[#0A0A0B] border border-[#27272A] flex items-center justify-between text-xs opacity-60">
+              <div class="flex items-center gap-3">
+                <span class="w-5 h-5 rounded-full bg-[#27272A] text-[#71717A] flex items-center justify-center text-[10px]">6</span>
+                <span class="text-[#A4A4A6]">6. Ready for Master Playback</span>
+              </div>
+              <span class="text-[11px] font-mono text-[#71717A]">Target 1080p MP4</span>
+            </div>
+          </div>
+
+          <!-- FAILURE RECOVERY & PRIOR DOWNLOAD BAR -->
+          <div class="pt-6 border-t border-[#27272A] bg-[#0A0A0B] p-4 rounded-xl space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="text-xs">
+                <span class="text-[#A4A4A6]">Need a working version immediately?</span>
+                <strong class="text-[#F7F5F0] ml-1">Previous v2 (1:18) is fully ready.</strong>
+              </div>
+              <button class="px-3.5 py-1.5 rounded-full bg-[#27272A] hover:bg-[#3F3F46] text-xs font-semibold text-[#F7F5F0] transition">
+                Download Previous Ready v2
+              </button>
+            </div>
+            
+            <!-- Simulated Stage Retry Control -->
+            <div class="pt-2 border-t border-[#27272A] flex items-center justify-between text-[11px] text-[#71717A]">
+              <span>Stage failed in test? Use isolated recovery:</span>
+              <button class="text-[#E58C33] hover:underline font-mono">Simulate: Retry failed stage 4</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- SCREEN 07: REVIEW VIDEO -->
+    <!-- ========================================================================= -->
+    <section id="screen-07" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-[#27272A] pb-4 gap-2">
+        <div>
+          <span class="text-xs font-mono uppercase text-[#E58C33] font-semibold tracking-wider">Screen 07 &bull; Specimen</span>
+          <h2 class="text-2xl font-bold text-[#F7F5F0] mt-1">Review Video (Master Player &amp; Caption Polish)</h2>
+          <p class="text-sm text-[#A4A4A6]">Portrait film frame (9:16) with safe-area captions, labeled play/sound controls, version switcher, and distinction between caption correction and spoken audio.</p>
+        </div>
+        <div class="text-xs text-[#71717A] font-mono">Anchor: #screen-07 &bull; Video playback review</div>
+      </div>
+
+      <div class="specimen-frame bg-[#121214] border border-[#27272A] rounded-2xl overflow-hidden">
+        <!-- Top bar with Version Switcher -->
+        <div class="px-6 py-3.5 border-b border-[#27272A] flex flex-wrap items-center justify-between gap-3 bg-[#0A0A0B]">
+          <div class="flex items-center gap-3">
+            <a href="#screen-02" class="text-xs text-[#A4A4A6] hover:text-[#F7F5F0]">← Library</a>
+            <span class="text-[#3F3F46]">|</span>
+            <span class="text-xs font-bold text-[#F7F5F0]">The Water Cycle</span>
+            <!-- Version Switcher -->
+            <div class="inline-flex rounded-lg p-0.5 bg-[#18181B] border border-[#27272A] text-xs">
+              <button class="px-2.5 py-0.5 rounded text-[#71717A] hover:text-[#F7F5F0]">v1 (1:12)</button>
+              <button class="px-2.5 py-0.5 rounded bg-[#E58C33] text-[#241507] font-bold">v2 (1:18) Active</button>
+              <button class="px-2.5 py-0.5 rounded text-[#71717A] hover:text-[#F7F5F0]">v3 (Draft)</button>
+            </div>
+          </div>
+          
+          <div class="flex items-center gap-3">
+            <button class="px-4 py-1.5 rounded-full bg-[#27272A] hover:bg-[#3F3F46] text-xs font-medium text-[#F7F5F0] transition inline-flex items-center gap-2">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              <span>Download 1080p MP4</span>
+            </button>
+            <a href="#screen-08" class="amber-btn px-4 py-1.5 rounded-full text-xs font-semibold inline-flex items-center gap-1.5">
+              <span>Continue to Publish</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="p-6 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- LEFT: 9:16 Portrait Film Mockup -->
+          <div class="lg:col-span-6 flex justify-center">
+            <div class="w-full max-w-[340px] aspect-[9/16] rounded-2xl bg-[#000000] border-2 border-[#27272A] relative overflow-hidden shadow-2xl flex flex-col justify-between">
+              
+              <!-- Video Header Safe Zone -->
+              <div class="p-4 z-20 flex items-center justify-between text-[11px] text-white/80">
+                <div class="flex items-center gap-2 bg-black/40 backdrop-blur px-2.5 py-1 rounded-full border border-white/10">
+                  <span class="w-2 h-2 rounded-full bg-[#E58C33]"></span>
+                  <span>Namaste Video &bull; 1080p</span>
+                </div>
+                <div class="bg-black/40 backdrop-blur px-2 py-1 rounded font-mono text-[10px]">
+                  0:34 / 1:18
+                </div>
+              </div>
+
+              <!-- Artwork Display (Western Ghats Cloud & Rain) -->
+              <div class="absolute inset-0 z-0">
+                <svg viewBox="0 0 360 640" class="w-full h-full object-cover">
+                  <!-- Deep gradient sky -->
+                  <defs>
+                    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#080F1D"/>
+                      <stop offset="60%" stop-color="#142138"/>
+                      <stop offset="100%" stop-color="#1F2F2B"/>
+                    </linearGradient>
+                  </defs>
+                  <rect width="360" height="640" fill="url(#skyGrad)" />
+                  
+                  <!-- Sun warmth subtle -->
+                  <circle cx="280" cy="120" r="50" fill="#E58C33" opacity="0.3" />
+
+                  <!-- Mountains silhouette -->
+                  <path d="M0 450 L 160 300 L 260 380 L 360 290 L 360 640 L 0 640 Z" fill="#11221D" />
+                  
+                  <!-- Rising vapour lines -->
+                  <path d="M50 480 Q 90 400, 160 320" stroke="#E58C33" stroke-width="2.5" fill="none" opacity="0.7" stroke-dasharray="4 4" />
+                  <path d="M90 510 Q 130 430, 200 350" stroke="#E58C33" stroke-width="2.5" fill="none" opacity="0.7" stroke-dasharray="4 4" />
+
+                  <!-- Dense Cumulonimbus Cloud -->
+                  <ellipse cx="200" cy="260" rx="110" ry="55" fill="#2E3C4F" opacity="0.95" />
+                  <ellipse cx="160" cy="235" rx="75" ry="45" fill="#3D4F67" opacity="0.95" />
+                  <ellipse cx="240" cy="245" rx="65" ry="40" fill="#4B607D" opacity="0.9" />
+
+                  <!-- Rain falling -->
+                  <line x1="160" y1="320" x2="150" y2="440" stroke="#7DD3FC" stroke-width="2" stroke-dasharray="3 4" />
+                  <line x1="190" y1="325" x2="180" y2="460" stroke="#7DD3FC" stroke-width="2" stroke-dasharray="3 4" />
+                  <line x1="220" y1="320" x2="210" y2="430" stroke="#7DD3FC" stroke-width="2" stroke-dasharray="3 4" />
+                </svg>
+              </div>
+
+              <!-- Center Play Badge overlay -->
+              <div class="relative z-10 mx-auto w-14 h-14 rounded-full bg-black/50 backdrop-blur border border-white/20 flex items-center justify-center text-white text-xl cursor-pointer hover:scale-105 transition">
+                ▶
+              </div>
+
+              <!-- Safe Area Instagram Caption Overlay -->
+              <div class="relative z-20 p-5 space-y-4">
+                
+                <!-- Instagram Safe Margin Indicator (Visual Guide) -->
+                <div class="border border-dashed border-[#E58C33]/40 rounded-lg p-3 bg-black/60 backdrop-blur-sm text-center">
+                  <div class="text-[9px] font-mono uppercase text-[#E58C33] mb-1">Instagram Caption Safe Zone (15% bottom inset)</div>
+                  <p class="text-sm font-bold text-[#F7F5F0] leading-snug drop-shadow-md">
+                    "This rapid cooling forces invisible vapour to flash-condense into towering cumulonimbus clouds."
+                  </p>
+                </div>
+
+                <!-- Video Controls & Scrubber -->
+                <div class="space-y-2 bg-black/80 backdrop-blur p-2.5 rounded-xl border border-white/10">
+                  <div class="w-full bg-white/20 h-1 rounded-full overflow-hidden cursor-pointer">
+                    <div class="bg-[#E58C33] h-full w-[44%]"></div>
+                  </div>
+                  <div class="flex items-center justify-between text-[11px] text-white/80">
+                    <div class="flex items-center gap-3">
+                      <button class="hover:text-white font-bold">❚❚ Pause</button>
+                      <button class="hover:text-white">🔊 Sound On</button>
+                    </div>
+                    <span class="font-mono text-[10px]">1080x1920 &bull; 30 fps</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: Text & Narration Correction Tools -->
+          <div class="lg:col-span-6 space-y-6">
+            <div>
+              <span class="text-xs font-mono uppercase text-[#E58C33]">Caption vs Audio Differentiation</span>
+              <h3 class="text-xl font-bold text-[#F7F5F0] mt-1">Fine-tune Captions Without Re-rendering Audio</h3>
+              <p class="text-xs text-[#A4A4A6] mt-1">
+                You can correct caption spelling or phrasing instantly. If you alter the spoken pronunciation, a partial voice re-synthesis will be scheduled.
+              </p>
+            </div>
+
+            <!-- Correction Mode 1: Caption Text Correction (Instant) -->
+            <div class="p-4 rounded-xl bg-[#18181B] border border-[#27272A] space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-[#F7F5F0]">1. On-Screen Caption Text (Instant Re-mux)</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[#10B981]/20 text-[#10B981]">Instant: No AI render</span>
+              </div>
+              <input type="text" value="This rapid cooling forces invisible vapour to flash-condense into towering cumulonimbus clouds." class="w-full bg-[#0A0A0B] border border-[#27272A] focus:border-[#E58C33] rounded-lg p-2.5 text-xs text-[#F7F5F0] focus:outline-none">
+              <div class="flex items-center justify-between text-[11px] text-[#71717A]">
+                <span>Applies updated text to video burn-in &amp; .SRT track</span>
+                <button class="text-xs text-[#E58C33] font-semibold hover:underline">Save Caption Fix</button>
+              </div>
+            </div>
+
+            <!-- Correction Mode 2: Spoken Narration Retake -->
+            <div class="p-4 rounded-xl bg-[#18181B] border border-[#27272A] space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-[#F7F5F0]">2. Revised Spoken Narration (Voice Synthesis)</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[#E58C33]/20 text-[#E58C33]">Requires 12s voice retake</span>
+              </div>
+              <textarea rows="2" class="w-full bg-[#0A0A0B] border border-[#27272A] focus:border-[#E58C33] rounded-lg p-2.5 text-xs text-[#F7F5F0] focus:outline-none resize-none">This rapid cooling forces invisible vapour to flash-condense into towering cumulonimbus clouds.</textarea>
+              <div class="flex items-center justify-between text-[11px] text-[#71717A]">
+                <span>Voice: Aditi (Natural Indian-English)</span>
+                <button class="px-3 py-1 rounded bg-[#27272A] text-xs font-medium text-[#F7F5F0] hover:bg-[#3F3F46]">Re-synthesize audio for this cue</button>
+              </div>
+            </div>
+
+            <!-- Action Card -->
+            <div class="p-4 rounded-xl bg-[#0A0A0B] border border-[#27272A] flex items-center justify-between">
+              <div>
+                <div class="text-xs font-bold text-[#F7F5F0]">Ready to distribute?</div>
+                <div class="text-[11px] text-[#A4A4A6]">Send directly to scheduled Instagram or export independent file.</div>
+              </div>
+              <a href="#screen-08" class="amber-btn px-5 py-2 rounded-full text-xs font-semibold">
+                Proceed to Publish
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- SCREEN 08: PUBLISH -->
+    <!-- ========================================================================= -->
+    <section id="screen-08" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-[#27272A] pb-4 gap-2">
+        <div>
+          <span class="text-xs font-mono uppercase text-[#E58C33] font-semibold tracking-wider">Screen 08 &bull; Specimen</span>
+          <h2 class="text-2xl font-bold text-[#F7F5F0] mt-1">Publish to Instagram &amp; Pre-Confirmation Review</h2>
+          <p class="text-sm text-[#A4A4A6]">Dedicated single private destination (<code class="text-[#E58C33]">@meera.learns</code>) via Meta Instagram Login, scheduling in Asia/Kolkata, and strict verification modal.</p>
+        </div>
+        <div class="text-xs text-[#71717A] font-mono">Anchor: #screen-08 &bull; Dispatch flow</div>
+      </div>
+
+      <div class="specimen-frame bg-[#121214] border border-[#27272A] rounded-2xl overflow-hidden max-w-4xl mx-auto">
+        <!-- Top bar -->
+        <div class="px-6 py-3.5 border-b border-[#27272A] flex items-center justify-between bg-[#0A0A0B]">
+          <div class="flex items-center gap-2">
+            <a href="#screen-07" class="text-xs text-[#A4A4A6] hover:text-[#F7F5F0]">← Review video</a>
+            <span class="text-[#3F3F46]">/</span>
+            <span class="text-xs font-bold text-[#F7F5F0]">Publish Video</span>
+          </div>
+          <div class="text-xs text-[#10B981] font-mono flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+            <span>Meta Session Verified</span>
+          </div>
+        </div>
+
+        <div class="p-6 sm:p-8 space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+            
+            <!-- Video & Poster Preview Column -->
+            <div class="md:col-span-4 space-y-3">
+              <div class="aspect-[9/16] rounded-xl bg-[#0A0A0B] border border-[#27272A] relative overflow-hidden flex flex-col justify-between p-3">
+                <div class="text-[10px] font-mono bg-black/80 px-2 py-0.5 rounded text-[#F7F5F0] self-start">
+                  Poster: Frame 0:34
+                </div>
+                <!-- Mini visual of clouds -->
+                <svg viewBox="0 0 100 140" class="w-full my-auto opacity-75">
+                  <path d="M10 110 L 50 60 L 80 90 L 100 70 L 100 140 L 10 140 Z" fill="#1C2E2A" />
+                  <ellipse cx="60" cy="50" rx="30" ry="16" fill="#3D4B5C" />
+                </svg>
+                <div class="text-center font-mono text-[10px] text-[#A4A4A6]">
+                  1080p MP4 &bull; 1:18 &bull; v2 Ready
+                </div>
+              </div>
+              <button class="w-full py-1.5 rounded-lg bg-[#18181B] border border-[#27272A] hover:bg-[#27272A] text-xs text-[#A4A4A6]">
+                Change Cover Frame
+              </button>
+            </div>
+
+            <!-- Form Details -->
+            <div class="md:col-span-8 space-y-4">
+              
+              <!-- Target Account Badge -->
+              <div class="p-3.5 rounded-xl bg-[#18181B] border border-[#27272A] flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-yellow-500 via-rose-500 to-purple-600 p-0.5">
+                    <div class="w-full h-full bg-[#18181B] rounded-full flex items-center justify-center text-xs font-bold text-[#F7F5F0]">
+                      ML
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-1.5">
+                      <span class="text-xs font-bold text-[#F7F5F0]">@meera.learns</span>
+                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-[#10B981]/20 text-[#10B981] font-mono">Professional</span>
+                    </div>
+                    <span class="text-[11px] text-[#A4A4A6]">Private destination &bull; Authorized via Meta</span>
+                  </div>
+                </div>
+                <a href="#screen-11" class="text-xs text-[#E58C33] hover:underline font-medium">Switch account</a>
+              </div>
+
+              <!-- Post Caption -->
+              <div class="space-y-1.5">
+                <label class="block text-xs font-semibold text-[#F7F5F0]">Instagram Post Caption</label>
+                <textarea rows="4" class="w-full bg-[#0A0A0B] border border-[#27272A] focus:border-[#E58C33] rounded-xl p-3 text-xs text-[#F7F5F0] leading-relaxed resize-none">Every raindrop you feel over the Western Ghats began as warm ocean water. Here is how solar energy and altitude condensation work together in under 90 seconds. 🌧️⛰️
+
+#EarthScience #MonsoonScience #WesternGhats #Education #WaterCycle</textarea>
+                <div class="text-[11px] text-[#71717A] text-right">248 characters</div>
+              </div>
+
+              <!-- Timing: Now vs Schedule -->
+              <div class="p-4 rounded-xl bg-[#18181B] border border-[#27272A] space-y-3">
+                <div class="flex items-center justify-between">
+                  <label class="text-xs font-semibold text-[#F7F5F0]">Publishing Schedule</label>
+                  <span class="text-[11px] font-mono text-[#E58C33]">Asia/Kolkata (IST)</span>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-3">
+                  <button class="p-2.5 rounded-lg bg-[#0A0A0B] border border-[#27272A] text-left text-xs hover:border-[#3F3F46]">
+                    <div class="font-bold text-[#A4A4A6]">Publish Now</div>
+                    <div class="text-[10px] text-[#71717A] mt-0.5">Immediate upload to Reel</div>
+                  </button>
+                  <button class="p-2.5 rounded-lg bg-[#202024] border-2 border-[#E58C33] text-left text-xs">
+                    <div class="font-bold text-[#F7F5F0]">Schedule for later</div>
+                    <div class="text-[10px] text-[#E58C33] mt-0.5">Selected: Today at 18:30 IST</div>
+                  </button>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 pt-1">
+                  <input type="date" value="2025-05-18" class="bg-[#0A0A0B] border border-[#27272A] rounded-lg p-2 text-xs text-[#F7F5F0] focus:outline-none">
+                  <input type="time" value="18:30" class="bg-[#0A0A0B] border border-[#27272A] rounded-lg p-2 text-xs text-[#F7F5F0] focus:outline-none">
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- PRE-CONFIRMATION REVIEW MODAL (INLINE SPECIMEN) -->
+          <div class="pt-6 border-t border-[#27272A]">
+            <span class="text-[11px] uppercase tracking-wider font-mono text-[#A4A4A6]">Pre-Confirmation Verification State</span>
+            
+            <div class="mt-3 p-5 rounded-xl bg-[#0A0A0B] border border-[#E58C33]/40 space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-[#E58C33] text-base">🔒</span>
+                  <h4 class="text-sm font-bold text-[#F7F5F0]">Confirm Scheduled Reel Dispatch</h4>
+                </div>
+                <span class="text-[10px] font-mono text-[#E58C33] bg-[#E58C33]/15 px-2 py-0.5 rounded">Irreversible once submitted</span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs border-y border-[#27272A] py-3">
+                <div>
+                  <span class="text-[10px] font-mono text-[#71717A]">VIDEO ARTIFACT</span>
+                  <div class="font-bold text-[#F7F5F0] mt-0.5">The Water Cycle (v2)</div>
+                  <div class="text-[11px] text-[#A4A4A6]">1080p &bull; 78s duration</div>
+                </div>
+                <div>
+                  <span class="text-[10px] font-mono text-[#71717A]">TARGET DESTINATION</span>
+                  <div class="font-bold text-[#F7F5F0] mt-0.5">@meera.learns</div>
+                  <div class="text-[11px] text-[#A4A4A6]">Meta IG Account Verified</div>
+                </div>
+                <div>
+                  <span class="text-[10px] font-mono text-[#71717A]">SCHEDULED TIME</span>
+                  <div class="font-bold text-[#E58C33] mt-0.5">Today 18:30 IST</div>
+                  <div class="text-[11px] text-[#A4A4A6]">Asia/Kolkata timezone</div>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between pt-1">
+                <button class="text-xs text-[#A4A4A6] hover:text-[#F7F5F0]">Cancel and edit draft</button>
+                <div class="flex items-center gap-3">
+                  <button class="px-4 py-2 rounded-full bg-[#18181B] text-xs text-[#F7F5F0] border border-[#27272A] hover:bg-[#27272A]">
+                    Independent MP4 Export
+                  </button>
+                  <a href="#screen-09" class="amber-btn px-5 py-2 rounded-full text-xs font-semibold">
+                    Confirm &amp; Schedule Reel
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- SCREEN 09: PUBLISHING ACTIVITY -->
+    <!-- ========================================================================= -->
+    <section id="screen-09" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-[#27272A] pb-4 gap-2">
+        <div>
+          <span class="text-xs font-mono uppercase text-[#E58C33] font-semibold tracking-wider">Screen 09 &bull; Specimen</span>
+          <h2 class="text-2xl font-bold text-[#F7F5F0] mt-1">Publishing Activity &amp; Status Ledger</h2>
+          <p class="text-sm text-[#A4A4A6]">Audit log showing Scheduled, Submitting, Processing, Published (with View Reel), Failed, and Missed entries.</p>
+        </div>
+        <div class="text-xs text-[#71717A] font-mono">Anchor: #screen-09 &bull; Queue &amp; ledger</div>
+      </div>
+
+      <div class="specimen-frame bg-[#121214] border border-[#27272A] rounded-2xl overflow-hidden max-w-4xl mx-auto">
+        <!-- Top bar -->
+        <div class="px-6 py-3.5 border-b border-[#27272A] flex items-center justify-between bg-[#0A0A0B]">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold text-[#F7F5F0]">Distribution Ledger</span>
+            <span class="text-[10px] font-mono text-[#A4A4A6]">&bull; Target: @meera.learns</span>
+          </div>
+          <button class="text-xs text-[#E58C33] hover:underline flex items-center gap-1">
+            <span>↻</span> Check Meta delivery status
+          </button>
+        </div>
+
+        <div class="p-6 sm:p-8 space-y-4">
+          
+          <!-- State 1: Scheduled (Active) -->
+          <div class="p-4 rounded-xl bg-[#18181B] border border-[#27272A] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-[#0EA5E9]"></span>
+                <span class="text-xs font-bold text-[#F7F5F0]">The Water Cycle (v2)</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[#0EA5E9]/15 text-[#0EA5E9]">Scheduled</span>
+              </div>
+              <p class="text-xs text-[#A4A4A6]">Queued for Today at 18:30 IST &bull; In 2 hours 14 mins</p>
+            </div>
+            <div class="flex items-center gap-2 self-start sm:self-auto">
+              <button class="px-3 py-1 rounded bg-[#27272A] hover:bg-[#3F3F46] text-xs text-[#F7F5F0]">Reschedule</button>
+              <button class="px-3 py-1 rounded bg-[#27272A] hover:bg-[#3F3F46] text-xs text-[#F43F5E]">Cancel</button>
+            </div>
+          </div>
+
+          <!-- State 2: Submitting / Processing -->
+          <div class="p-4 rounded-xl bg-[#18181B] border border-[#27272A] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-[#E58C33] animate-ping"></div>
+                <span class="text-xs font-bold text-[#F7F5F0]">Why Monsoon Clouds Darken</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[#E58C33]/15 text-[#E58C33]">Submitting to Meta API</span>
+              </div>
+              <p class="text-xs text-[#A4A4A6]">Uploading chunks 4/5 &bull; Handshake in progress</p>
+            </div>
+            <span class="text-xs font-mono text-[#71717A]">Do not disconnect</span>
+          </div>
+
+          <!-- State 3: Published with View Reel -->
+          <div class="p-4 rounded-xl bg-[#18181B] border border-[#27272A] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+                <span class="text-xs font-bold text-[#F7F5F0]">Thermal Convection Explained (v1)</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[#10B981]/15 text-[#10B981]">Published</span>
+              </div>
+              <p class="text-xs text-[#A4A4A6]">Delivered yesterday at 18:30 IST &bull; Instagram Reel ID #83921</p>
+            </div>
+            <button class="px-3 py-1.5 rounded-full bg-[#27272A] hover:bg-[#3F3F46] text-xs font-semibold text-[#F7F5F0] inline-flex items-center gap-1.5">
+              <span>View Reel on Instagram</span>
+              <span class="text-xs">↗</span>
+            </button>
+          </div>
+
+          <!-- State 4: Uncertain Delivery / Failed -->
+          <div class="p-4 rounded-xl bg-[#0A0A0B] border border-[#F43F5E]/40 space-y-2">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-[#F43F5E]"></span>
+                <span class="text-xs font-bold text-[#F7F5F0]">Ocean Heat Absorption (v1)</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[#F43F5E]/15 text-[#F43F5E]">Delivery Uncertain</span>
+              </div>
+              <span class="text-xs font-mono text-[#71717A]">Meta Code 190</span>
+            </div>
+            <p class="text-xs text-[#A4A4A6]">Meta server did not acknowledge the final container publish event. Check status before retrying to prevent duplicate posts.</p>
+            <div class="flex items-center gap-3 pt-1">
+              <button class="amber-btn px-3 py-1 rounded text-xs font-bold">Query Meta Status First</button>
+              <button class="text-xs text-[#A4A4A6] hover:underline">Force Resend</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- SCREEN 10: VOICE SETTINGS -->
+    <!-- ========================================================================= -->
+    <section id="screen-10" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-[#27272A] pb-4 gap-2">
+        <div>
+          <span class="text-xs font-mono uppercase text-[#E58C33] font-semibold tracking-wider">Screen 10 &bull; Specimen</span>
+          <h2 class="text-2xl font-bold text-[#F7F5F0] mt-1">Voice Settings &amp; Indian-English Narration Model</h2>
+          <p class="text-sm text-[#A4A4A6]">Audition two specialized Indian-English natural voices, manage default workspace narration, or override per project.</p>
+        </div>
+        <div class="text-xs text-[#71717A] font-mono">Anchor: #screen-10 &bull; Voice acoustics</div>
+      </div>
+
+      <div class="specimen-frame bg-[#121214] border border-[#27272A] rounded-2xl overflow-hidden max-w-4xl mx-auto">
+        <div class="px-6 py-3.5 border-b border-[#27272A] flex items-center justify-between bg-[#0A0A0B]">
+          <span class="text-xs font-bold text-[#F7F5F0]">Narration Audio Profiles</span>
+          <span class="text-xs text-[#A4A4A6] font-mono">Workspace Default</span>
+        </div>
+
+        <div class="p-6 sm:p-8 space-y-6">
+          <div class="space-y-1">
+            <h3 class="text-xl font-bold text-[#F7F5F0]">Indian-English Synthesizer Voices</h3>
+            <p class="text-xs text-[#A4A4A6]">Calibrated for educational cadence, technical pronunciation, and clear pacing (135–142 wpm).</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+            <!-- Voice 1: Aditi (Default Active) -->
+            <div class="p-5 rounded-xl bg-[#202024] border-2 border-[#E58C33] space-y-4 relative">
+              <div class="absolute top-4 right-4 bg-[#E58C33] text-[#241507] text-[10px] font-bold px-2 py-0.5 rounded-full">
+                WORKSPACE DEFAULT
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-full bg-[#E58C33] text-[#241507] flex items-center justify-center font-bold text-sm">
+                    A
+                  </div>
+                  <div>
+                    <h4 class="text-base font-bold text-[#F7F5F0]">Aditi</h4>
+                    <span class="text-xs text-[#A4A4A6]">Warm, articulate &bull; Female</span>
+                  </div>
+                </div>
+              </div>
+              <p class="text-xs text-[#A4A4A6] leading-relaxed">
+                "Solar energy warms ocean surface layers; vapour begins its inland ascent over the Western Ghats."
+              </p>
+              
+              <!-- Audio Player Mockup -->
+              <div class="p-2.5 rounded-lg bg-[#0A0A0B] border border-[#27272A] flex items-center justify-between text-xs">
+                <button class="flex items-center gap-2 text-[#E58C33] font-bold">
+                  <span>▶</span> Preview sample (4s)
+                </button>
+                <span class="text-[10px] font-mono text-[#71717A]">138 WPM</span>
+              </div>
+            </div>
+
+            <!-- Voice 2: Rohan (Alternative) -->
+            <div class="p-5 rounded-xl bg-[#18181B] border border-[#27272A] hover:border-[#3F3F46] space-y-4">
+              <div>
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-full bg-[#27272A] text-[#F7F5F0] flex items-center justify-center font-bold text-sm">
+                    R
+                  </div>
+                  <div>
+                    <h4 class="text-base font-bold text-[#F7F5F0]">Rohan</h4>
+                    <span class="text-xs text-[#A4A4A6]">Authoritative, calm &bull; Male</span>
+                  </div>
+                </div>
+              </div>
+              <p class="text-xs text-[#A4A4A6] leading-relaxed">
+                "When moist air strikes the mountain boundary, temperature drops rapidly by 6.5 degrees per thousand meters."
+              </p>
+              
+              <!-- Audio Player Mockup -->
+              <div class="p-2.5 rounded-lg bg-[#0A0A0B] border border-[#27272A] flex items-center justify-between text-xs">
+                <button class="flex items-center gap-2 text-[#F7F5F0] hover:text-[#E58C33] font-medium">
+                  <span>▶</span> Preview sample (4s)
+                </button>
+                <span class="text-[10px] font-mono text-[#71717A]">142 WPM</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Setting Persistence -->
+          <div class="pt-4 border-t border-[#27272A] flex items-center justify-between">
+            <span class="text-xs text-[#71717A]">Individual projects can override this setting at any time.</span>
+            <button class="amber-btn px-5 py-2 rounded-full text-xs font-semibold">
+              Save Default Voice (Aditi)
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- SCREEN 11: INSTAGRAM SETTINGS & CONNECTION -->
+    <!-- ========================================================================= -->
+    <section id="screen-11" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-[#27272A] pb-4 gap-2">
+        <div>
+          <span class="text-xs font-mono uppercase text-[#E58C33] font-semibold tracking-wider">Screen 11 &bull; Specimen</span>
+          <h2 class="text-2xl font-bold text-[#F7F5F0] mt-1">Instagram Connection &amp; Account Governance</h2>
+          <p class="text-sm text-[#A4A4A6]">Meta Professional account handshake, single private destination, permission verification, disconnect impact, and held schedule recovery.</p>
+        </div>
+        <div class="text-xs text-[#71717A] font-mono">Anchor: #screen-11 &bull; Account security</div>
+      </div>
+
+      <div class="specimen-frame bg-[#121214] border border-[#27272A] rounded-2xl overflow-hidden max-w-4xl mx-auto">
+        <div class="px-6 py-3.5 border-b border-[#27272A] flex items-center justify-between bg-[#0A0A0B]">
+          <span class="text-xs font-bold text-[#F7F5F0]">Meta Integration Settings</span>
+          <span class="text-xs text-[#10B981] font-mono">1 Eligible Account Connected</span>
+        </div>
+
+        <div class="p-6 sm:p-8 space-y-6">
+          <div class="space-y-1">
+            <h3 class="text-xl font-bold text-[#F7F5F0]">Direct Instagram Reels Destination</h3>
+            <p class="text-xs text-[#A4A4A6]">Namaste Video authorizes one professional or creator account per private workspace. Shared destinations are strictly disallowed in pilot.</p>
+          </div>
+
+          <!-- Connected Account Card -->
+          <div class="p-5 rounded-xl bg-[#18181B] border border-[#27272A] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-yellow-500 via-rose-500 to-purple-600 p-0.5">
+                <div class="w-full h-full bg-[#18181B] rounded-full flex items-center justify-center text-sm font-bold text-[#F7F5F0]">
+                  ML
+                </div>
+              </div>
+              <div class="space-y-0.5">
+                <div class="flex items-center gap-2">
+                  <span class="text-sm font-bold text-[#F7F5F0]">@meera.learns</span>
+                  <span class="text-[10px] px-2 py-0.5 rounded bg-[#10B981]/20 text-[#10B981] font-mono">Active Connection</span>
+                </div>
+                <div class="text-xs text-[#A4A4A6]">Category: Science &amp; Education &bull; Token valid until Dec 2025</div>
+                <div class="text-[11px] text-[#71717A]">Permissions: <code class="text-[#A4A4A6]">instagram_content_publish</code>, <code class="text-[#A4A4A6]">instagram_manage_insights</code></div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 self-start sm:self-auto">
+              <button class="px-3 py-1.5 rounded-lg bg-[#27272A] hover:bg-[#3F3F46] text-xs text-[#F7F5F0]">Refresh Token</button>
+              <button class="px-3 py-1.5 rounded-lg bg-[#27272A] hover:bg-[#3F3F46] text-xs text-[#F43F5E]">Disconnect</button>
+            </div>
+          </div>
+
+          <!-- INLINE EDGE CASES: INELIGIBLE ACCOUNT & DISCONNECT IMPACT -->
+          <div class="pt-6 border-t border-[#27272A] space-y-4">
+            <span class="text-[11px] uppercase tracking-wider font-mono text-[#A4A4A6]">Account Handshake Edge Cases &bull; Recovery</span>
+
+            <!-- Case 1: Ineligible personal account -->
+            <div class="p-4 rounded-xl bg-[#0A0A0B] border border-[#F43F5E]/40 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-[#F7F5F0]">Account denied: @meera_personal is not a Professional account</span>
+                <span class="text-[10px] font-mono text-[#F43F5E] bg-[#F43F5E]/10 px-2 py-0.5 rounded">Meta Error 400</span>
+              </div>
+              <p class="text-xs text-[#A4A4A6]">
+                Meta's Reels Publishing API requires a free Creator or Business account type. Personal profiles cannot accept API scheduled uploads.
+              </p>
+              <div class="flex items-center gap-3 pt-1">
+                <a href="https://help.instagram.com" target="_blank" class="text-xs text-[#E58C33] hover:underline font-medium">How to switch account type in Instagram app →</a>
+                <button class="px-3 py-1 rounded bg-[#27272A] text-xs text-[#F7F5F0] hover:bg-[#3F3F46]">Retry Authorization</button>
+              </div>
+            </div>
+
+            <!-- Case 2: Disconnect impact & Held schedules -->
+            <div class="p-4 rounded-xl bg-[#18181B] border border-[#27272A] space-y-2">
+              <div class="flex items-center gap-2">
+                <span class="text-[#E58C33] text-sm leading-none">⚠</span>
+                <span class="text-xs font-bold text-[#F7F5F0]">Disconnect Impact Notice</span>
+              </div>
+              <p class="text-xs text-[#A4A4A6]">
+                Disconnecting will pause <strong class="text-[#F7F5F0]">1 scheduled video</strong> ("The Water Cycle", today 18:30 IST). Paused videos are held safely in your project queue and will not dispatch until re-verified.
+              </p>
+              <div class="text-[11px] text-[#71717A]">
+                No existing published Reels will be modified or removed from Instagram.
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-[#27272A] pt-8 pb-16 text-center text-xs text-[#71717A] space-y-2">
+      <div class="flex items-center justify-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-[#E58C33]"></span>
+        <span class="text-[#F7F5F0] font-bold">Namaste Video V1</span>
+        <span>&bull;</span>
+        <span>Internal Pilot Release</span>
+      </div>
+      <p>Single private workspace per user &bull; 60–90s vertical educational narrations &bull; Natural language storyboards</p>
+    </footer>
+
+  </main>
+<script>const reviewBar = document.querySelector("body > header, body > aside"); if (reviewBar) new ResizeObserver(() => document.documentElement.style.setProperty("--review-offset", (reviewBar.offsetHeight + 12) + "px")).observe(reviewBar);</script></body>
+</html>

@@ -1,0 +1,67 @@
+{
+  "id": "water-cycle",
+  "revision": "water-cycle-v1",
+  "title": "How the water cycle works",
+  "scenes": [
+    {
+      "title": "Water keeps moving",
+      "duration": 12,
+      "active": "cycle",
+      "reveal": 6,
+      "captions": [
+        {"at": 0, "text": "The water in a puddle may one day fall as rain."},
+        {"at": 6, "text": "The water cycle moves water between land, oceans and the air."}
+      ]
+    },
+    {
+      "title": "Evaporation",
+      "duration": 12,
+      "active": "evaporation",
+      "reveal": 6,
+      "captions": [
+        {"at": 0, "text": "The Sun warms water in oceans, rivers and lakes."},
+        {"at": 6, "text": "Some of that liquid becomes invisible water vapour and enters the air."}
+      ]
+    },
+    {
+      "title": "Condensation",
+      "duration": 12,
+      "active": "condensation",
+      "reveal": 6,
+      "captions": [
+        {"at": 0, "text": "As moist air rises and cools, some water vapour condenses."},
+        {"at": 6, "text": "Tiny water droplets gather into clouds. Some clouds also contain ice crystals."}
+      ]
+    },
+    {
+      "title": "Precipitation",
+      "duration": 12,
+      "active": "precipitation",
+      "reveal": 6,
+      "captions": [
+        {"at": 0, "text": "Inside a cloud, droplets or ice crystals can grow."},
+        {"at": 6, "text": "When they get heavy enough, water falls as rain, snow or hail."}
+      ]
+    },
+    {
+      "title": "Collection and runoff",
+      "duration": 12,
+      "active": "collection",
+      "reveal": 6,
+      "captions": [
+        {"at": 0, "text": "Some fallen water soaks into the ground. Some flows over the surface."},
+        {"at": 6, "text": "Streams and rivers can carry that water back to lakes or oceans."}
+      ]
+    },
+    {
+      "title": "The cycle continues",
+      "duration": 12,
+      "active": "cycle",
+      "reveal": 3,
+      "captions": [
+        {"at": 0, "text": "Water can stay in ice, soil or the ocean for a while."},
+        {"at": 6, "text": "Later it can evaporate again, and the journey continues."}
+      ]
+    }
+  ]
+}

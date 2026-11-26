@@ -1,0 +1,61 @@
+* { box-sizing: border-box }
+:root { color-scheme: dark; --bg:#0a0a0b; --panel:#151516; --line:#34312e; --ink:#f7f5f0; --muted:#b2ada7; --amber:#ffc36c }
+body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 system-ui,sans-serif }
+button, textarea { font:inherit }
+a { color:inherit; text-decoration:none }
+button { cursor:pointer; background:var(--panel); color:var(--ink); border:1px solid var(--line); border-radius:9px; min-height:44px; padding:6px 14px }
+:focus-visible { outline:3px solid var(--amber); outline-offset:3px }
+.skip { position:fixed; top:-100px; background:black; padding:12px; z-index:4 }
+.skip:focus { top:4px }
+.rail { width:252px; position:fixed; inset:0 auto 0 0; border-right:1px solid var(--line); padding:28px 18px; display:flex; flex-direction:column; background:#101011; overflow:auto }
+.brand { display:inline-flex; align-items:center; gap:10px; font-weight:750; letter-spacing:-.055em; font-size:22px }
+.brand-icon { font-size:12px; display:grid; place-items:center; border-radius:9px; width:30px; height:30px; background:var(--amber); color:#241507 }
+.rail .brand { margin:0 8px 44px }
+nav { display:grid; gap:5px }
+nav a { display:flex; align-items:center; gap:12px; min-height:46px; padding:8px 12px; border-radius:9px; color:var(--muted); font-size:15px }
+nav a:hover,.tiles a:hover { background:#242121 }
+nav [aria-current=page] { background:#302317; color:var(--amber); font-weight:650 }
+.rail small { margin-top:auto; padding:30px 12px 0 }
+main { margin-left:252px; padding:42px clamp(24px,5vw,84px); max-width:1560px }
+.section-head { margin-bottom:26px }
+h1,h2,p { margin:0 }
+.section-head p,small,.hint,.block p,.panel p,.tiles span { color:var(--muted) }
+h1 { font-size:clamp(32px,4vw,56px); line-height:1.1; letter-spacing:-.06em }
+.section-head p { margin-bottom:8px }
+.feature { display:grid; grid-template-columns:1.2fr 1fr; align-items:stretch; border:1px solid #413324; border-radius:22px; overflow:hidden; background:linear-gradient(130deg,#231b15,#151312) }
+.feature>div:first-child { padding:clamp(24px,3.5vw,58px) }
+.feature h2 { font-size:clamp(40px,5vw,78px); line-height:.99; letter-spacing:-.07em; margin:18px 0 }
+.feature p:not(.eyebrow) { color:#d0c6ba; max-width:40ch }
+.eyebrow { color:var(--amber); font-weight:650 }
+.action { display:inline-flex; align-items:center; gap:14px; background:#e99b4b; color:#241507; border-radius:30px; padding:12px 20px; font-weight:700; margin-top:26px }
+.cover { min-height:240px; position:relative }
+.cover img { position:absolute; width:100%; height:100%; object-fit:cover; object-position:center 45% }
+.block { margin-top:38px }
+.block h2,.panel h2 { letter-spacing:-.04em; font-size:26px }
+.tiles { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px }
+.tiles a,.panel,.field { padding:24px; background:var(--panel); border:1px solid var(--line); border-radius:16px }
+.tiles strong,.tiles span,label { display:block }
+.block video { margin-top:14px; max-width:100%; height:min(520px,64vh); border-radius:12px; background:#000 }
+.field { max-width:760px }
+.field label { font-weight:650 }
+.field textarea { margin:14px 0 4px; width:100%; padding:14px; min-height:190px; resize:vertical; background:#0c0c0c; color:var(--ink); border:1px solid #544938; border-radius:8px }
+.hint { margin-top:12px }
+.panel { max-width:680px }
+.mobile-bar { display:none }
+dialog { padding:0; border:1px solid var(--line); border-radius:14px; background:#101011; color:var(--ink); width:min(420px,94vw); max-height:90dvh }
+dialog::backdrop { background:#000a }
+.drawer { padding:18px }
+.drawer-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px }
+@media(max-width:1099px) {
+  .rail { display:none }
+  .mobile-bar { display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:2; background:#101011; border-bottom:1px solid var(--line); padding:10px 20px }
+  main { margin:0; padding:26px 20px }
+  #sample { scroll-margin-top:80px }
+}
+@media(max-width:640px) {
+  .feature { grid-template-columns:1fr }
+  .cover { min-height:170px; max-height:210px }
+  .tiles { grid-template-columns:1fr }
+  .section-head { margin-bottom:20px }
+  .block { margin-top:24px }
+}
