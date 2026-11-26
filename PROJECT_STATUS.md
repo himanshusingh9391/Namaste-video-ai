@@ -60,3 +60,5 @@ Each link opens a separate design. Together they are the visual reference for th
 ## Version control
 
 The public repository is [Namaste-video-ai on GitHub](https://github.com/himanshusingh9391/Namaste-video-ai). The initial milestone includes the workspace scaffold, the local video prototype, design previews and project documents. Each subsequent completed step includes a status update, a scoped commit and a verified push.
+
+The dev branch starts at scaffold commit be1f4a5. Develop and verify milestones on dev. Promote a finalized release to main through a pull request after user approval.
