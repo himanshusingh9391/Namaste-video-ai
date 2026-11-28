@@ -1,3 +1,4 @@
+import { checkProjects } from './check-projects.mjs';
 import assert from 'node:assert/strict';
 import { MongoClient } from 'mongodb';
 import { randomUUID } from 'node:crypto';
@@ -33,6 +34,19 @@ try {
   const login=await post('sign-in/email',{email,password});
   assert.equal(login.status,200);
   const cookie=login.headers.getSetCookie().map(v=>v.split(';')[0]).join('; ');
+  if(process.argv.includes('--projects')) {
+    // Let the previous password-setup attempts leave the authentication throttle window.
+    await new Promise(resolve => setTimeout(resolve, 61000));
+    const secondEmail='other@example.invalid';
+    await db.collection('pilotInvites').insertOne({normalizedEmail:secondEmail,status:'active',createdAt:new Date()});
+    const link=execFileSync(process.execPath,['scripts/password-link.mjs',secondEmail],{env,encoding:'utf8'}).trim().split(/\r?\n/).at(-1);
+    const secondToken=new URLSearchParams(new URL(link).hash.slice(1)).get('setup');
+    assert.equal((await post('reset-password',{token:secondToken,newPassword:password})).status,200);
+    const second=await post('sign-in/email',{email:secondEmail,password});
+    assert.equal(second.status,200);
+    await checkProjects(base,cookie,second.headers.getSetCookie().map(v=>v.split(';')[0]).join('; '));
+    console.log('Verified project ownership, validation, pagination, revision conflicts, deletion and creation replay.');
+  }
   const get=path=>fetch(base+path,{headers:{cookie},redirect:'manual'});
   assert.equal((await get('/dashboard')).status,200);
   const entry = await get('/sign-in');

@@ -13,7 +13,7 @@ export function configured() {
 }
 
 let client: MongoClient | undefined;
-function databaseClient() {
+export function databaseClient() {
   if (!process.env.MONGODB_URI) throw new Error('MongoDB is not configured');
   return client ??= new MongoClient(process.env.MONGODB_URI, { serverSelectionTimeoutMS: 5000 });
 }
