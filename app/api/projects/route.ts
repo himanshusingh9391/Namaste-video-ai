@@ -11,6 +11,8 @@ export function GET(request: Request) {
     const limit = Number(query.get('limit') ?? 20);
     if (!Number.isInteger(limit) || limit < 1 || limit > 100) return fail(400,'Invalid limit');
     const filter: Filter<Document> = {ownerId, deletedAt:{$exists:false}};
+    const stage = query.get('stage');
+    if (stage) filter.lastStage = stage;
     const cursor = query.get('cursor');
     if (cursor !== null) {
       try {

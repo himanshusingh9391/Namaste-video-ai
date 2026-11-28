@@ -14,7 +14,7 @@ The following sequence follows the F00–F22 backlog. Status reflects this check
 | F03 | Account admission and sessions | Authenticated feature verified against an isolated Atlas database. Only active invitations admit users. Revoked, unlisted and public signup checks passed. |
 | F04 | Sign-in, recovery and private routes | Password setup, sign-in, expiry, six anonymous redirects and sign-out verified against the production build. Email delivery still requires a verified sender. |
 | F05 | Personal project create, list, rename and delete APIs | Authenticated API verified against an isolated Atlas database. GET/POST /api/projects and GET/PATCH/DELETE /api/projects/:id passed two-owner isolation, pagination, validation, stale revision, soft deletion and idempotent creation checks. Production build passed. |
-| F06 | My videos library | Planned. Connect real projects, filters, pagination and empty/error states. |
+| F06 | My videos library | Authenticated /videos library verified with isolated Atlas data and headless Edge. Mobile create/rename/delete dialogs, stage and empty filters, desktop 12-to-13 pagination, failed-list retry and production build passed. |
 | F07 | Idea draft persistence, autosave and conflicts | Browser-only notes exist. Server revisions and recovery remain. |
 | F08 | Idea and brainstorming UI | Basic notebook exists. Gemini suggestions and draft integration remain. |
 | F09 | Storyboard generation backend | Planned. Validate generated scenes and recover from provider failures. |

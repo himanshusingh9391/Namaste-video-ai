@@ -8,6 +8,7 @@ import { authClient } from './auth-client';
 export const OwnerContext = createContext('');
 const destinations = [
   ['/dashboard', 'Overview', 'M3 3h7v7H3z M14 3h7v7h-7z M3 14h7v7H3z M14 14h7v7h-7z'],
+  ['/videos', 'My videos', 'M3 5h18v14H3z M10 9l5 3-5 3z'],
   ['/projects/new', 'Create video', 'M12 5v14 M5 12h14'],
   ['/ideas', 'Idea notebook', 'M5 3h14v18H5z M8 8h8 M8 12h6'],
   ['/activity', 'Publishing activity', 'M3 12h4l3-7 4 14 3-7h4'],
