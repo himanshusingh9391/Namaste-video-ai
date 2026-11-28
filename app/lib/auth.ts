@@ -6,8 +6,7 @@ import { MongoClient } from 'mongodb';
 
 export function configured() {
   return Boolean(process.env.MONGODB_URI && process.env.BETTER_AUTH_URL &&
-    (process.env.BETTER_AUTH_SECRET?.length ?? 0) >= 32 &&
-    process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET);
+    (process.env.BETTER_AUTH_SECRET?.length ?? 0) >= 32);
 }
 
 let client: MongoClient | undefined;
@@ -31,7 +30,9 @@ function createAuth() {
     baseURL: process.env.BETTER_AUTH_URL!,
     secret: process.env.BETTER_AUTH_SECRET!,
     database: mongodbAdapter(client.db(), { client }),
+    emailAndPassword: { enabled: true, disableSignUp: true, requireEmailVerification: true, minPasswordLength: 12, revokeSessionsOnPasswordReset: true },
     socialProviders: { google: {
+      enabled: Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET),
       clientId: process.env.GOOGLE_CLIENT_ID!, clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
       prompt: 'select_account',
       async mapProfileToUser(profile) {
@@ -42,13 +43,19 @@ function createAuth() {
       }
     } },
     databaseHooks: {
+      session: { create: { async before(session, ctx) {
+        const user = await ctx?.context.internalAdapter.findUserById(session.userId);
+        if (!user || !(await hasInvite(user.email, user.emailVerified))) {
+          throw new APIError('FORBIDDEN', { message: 'Pilot invitation required.' });
+        }
+      } } },
       user: { create: { async before(user) {
         if (!(await hasInvite(user.email, user.emailVerified))) {
           throw new APIError('FORBIDDEN', { message: 'Pilot invitation required.' });
         }
       } } }
     },
-    account: { accountLinking: { enabled: false } },
+    account: { accountLinking: { enabled: true, trustedProviders: ['google'] } },
     onAPIError: { errorURL: '/sign-in?reason=signin' }
   });
 }

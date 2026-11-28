@@ -1,4 +1,5 @@
 import { privatePage } from '../lib/private-page';
+import { PasswordSettings } from './password-settings';
 import Link from 'next/link';
 
 function Dashboard() {
@@ -8,7 +9,7 @@ function Dashboard() {
     <section className="block"><h2>Your workspace</h2><div className="tiles">
     <Link href="/projects/new"><strong>Create video</strong><span>Start with a topic or teaching notes.</span></Link>
     <Link href="/ideas"><strong>Idea notebook</strong><span>Keep a thought for your next explainer.</span></Link></div></section>
-    <section className="block" id="sample"><h2>The water cycle</h2><p>English narration · Portrait video</p><video controls playsInline preload="none" poster="/samples/water-cycle.png" src="/samples/water-cycle.mp4"/></section></>;
+    <PasswordSettings/><section className="block" id="sample"><h2>The water cycle</h2><p>English narration · Portrait video</p><video controls playsInline preload="none" poster="/samples/water-cycle.png" src="/samples/water-cycle.mp4"/></section></>;
 }
 
 export default privatePage('/dashboard', Dashboard);

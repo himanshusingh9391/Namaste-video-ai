@@ -8,6 +8,7 @@ This is the development ledger for the invite-only pilot. Update the relevant ro
 |---|---|---|---|
 | 01 | Run the Next.js workspace and navigate each destination on desktop, tablet and phone. | Complete | Production build, type check and browser navigation checks passed on 26 November 2026. |
 | 02 | Admit approved Google accounts, create individual workspaces, sign out and return to the original route. | Ready for pilot test | Google OAuth, Atlas admission and protected workspace routes implemented. Live Google consent and authenticated sign-out await the tester. |
+| 02b | Sign in with a chosen password and return to the same private workspace. | Ready for local pilot test | Production build and isolated Atlas round trip passed. See the password pilot entry below. |
 | 03 | Save projects and ideas per creator, list drafts, enforce ownership and resume the latest saved stage. | Planned | Replace browser-only notes with authenticated persistence. Check with two creators. |
 | 04 | Generate a validated, timed storyboard from notes and ask one clarification when needed. | Planned | Gemini planning and recoverable validation. |
 | 05 | Edit individual scenes, propose a conversational revision, compare, apply or discard and approve an exact revision. | Planned | Cover autosave failure and edit conflicts. |
@@ -68,3 +69,11 @@ The dev branch starts at scaffold commit be1f4a5. Develop and verify milestones 
 Open http://localhost:3000/sign-in on the development computer. Continue with the invited Google account, open Overview, then choose Sign out in the sidebar or compact Menu. Reopen /dashboard to verify that sign-in is required again. The app uses verified Google email, an active Atlas invitation and a Better Auth session. Local notes use separate browser keys per owner.
 
 Verified the production build, Atlas ping and pilot invitation, sign-in page, redirects from all six private routes, Google authorization URL and registered callback, and the sign-out endpoint with an anonymous browser session. Live account consent, signed-in dashboard viewing and session invalidation await the tester. To start locally use npm run dev. Configure the server values listed in .env.example in .env.local and manage pilot membership with npm run invite -- grant or revoke followed by the email address.
+
+## 28 November 2026 · Email and password pilot
+
+Open http://localhost:3000/sign-in. An invited Google user can open Overview, choose **Add an email sign-in password**, and save a password of 12–128 characters. Sign out and sign in with the same email and chosen password to return to the same workspace. Opening a private link before sign-in returns the creator to that allowed destination. A direct sign-in opens Overview.
+
+For setup without Google, the pilot administrator runs `npm run password-link -- email@example.com` from the configured checkout for an active invitation. Deliver the printed single-use link privately to the verified owner of the invited email. It expires after 15 minutes and also works for password recovery. Opening it lets the creator choose their password. Completing this flow invalidates earlier sessions. The production app uses Better Auth and the MongoDB adapter for password hashes and sessions. Google credentials are optional for email sign-in.
+
+Verified the production build and TypeScript checks. Exercised setup, single-use token consumption, successful email sign-in, incorrect password rejection, dashboard access, the authenticated sign-in redirect and sign-out invalidation against an isolated temporary Atlas database. Verified the updated sign-in page on localhost:3000. The real creator's Google-to-password setup and interactive browser walkthrough remain for pilot review. Hosting remains pending.

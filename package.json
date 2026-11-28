@@ -22,6 +22,7 @@
     "build": "next build",
     "start": "next start --hostname 127.0.0.1",
     "typecheck": "tsc --noEmit",
-    "invite": "node --env-file=.env.local scripts/pilot-invite.mjs"
+    "invite": "node --env-file=.env.local scripts/pilot-invite.mjs",
+    "password-link": "node --env-file=.env.local scripts/password-link.mjs"
   }
 }
