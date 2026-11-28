@@ -4,13 +4,14 @@ This is the development ledger for the invite-only pilot. Update the relevant ro
 
 ## Feature delivery order
 
-The following sequence follows the two supplied roadmap screenshots. Status reflects this checkout. The earlier pilot milestones and their evidence are preserved below.
+The following sequence follows the F00–F22 backlog. Status reflects this checkout. The earlier pilot milestones and their evidence are preserved below.
 
 | Slice | Feature | Current evidence or next check |
 |---|---|---|
+| F00 | Local idea-to-video proof of concept | Local narrated water-cycle prototype and revised export recorded below. |
 | F01 | Next.js workspace, shared styles and navigation | Implemented and previously checked on desktop and mobile. |
 | F02 | MongoDB adapter, collection validation and initial indexes | Existing authentication adapter plus workspace schema setup. Verified locally below. |
-| F03 | Account admission and sessions | Verified email accounts admitted. Explicit pilot revocations still block access. |
+| F03 | Account admission and sessions | Current implementation admits verified email accounts. The internal-only backlog calls for approved users, disabled-user checks and closed signup. |
 | F04 | Sign-in, recovery and private routes | Self-service setup UI and protected routes build locally. Real inbox delivery awaits sender configuration. |
 | F05 | Personal project create, list, rename and delete APIs | Planned. Check two owners, revisions and pagination. |
 | F06 | My videos library | Planned. Connect real projects, filters, pagination and empty/error states. |
@@ -19,9 +20,17 @@ The following sequence follows the two supplied roadmap screenshots. Status refl
 | F09 | Storyboard generation backend | Planned. Validate generated scenes and recover from provider failures. |
 | F10 | Combined storyboard and script review | Design only. Implement scene editing and narration review. |
 | F11 | Conversational revisions and approval | Planned. Bind approval to an exact revision. |
-| F12 | Private R2 storage and media access | Planned. Check ownership before private media delivery. |
+| F12 | Private Cloudinary asset adapter and media access | Planned. Verify authenticated upload and read, owner-only access, expiring delivery and missing-asset handling in the existing Cloudinary account. |
 | F13 | Durable generation jobs | Planned. Verify retry, cancellation and duplicate delivery. |
 | F14 | Hosted rendering | Local water-cycle prototype exists. Hosted rendering remains. |
+| F15 | Video review, approval and download | Planned. Play real media, select and approve an exact version, and export it. |
+| F16 | Caption and video revisions | Planned. Rerender caption edits, route spoken changes to storyboard review and retain previous output. |
+| F17 | Personal preferences | Planned. Persist timezone and future-project voice without changing existing projects. |
+| F18 | Personal Instagram authorization | Planned. Verify callback, eligibility, reconnect, disconnect and owner isolation. |
+| F19 | Reviewed Post now flow | Planned. Confirm the exact asset, account and caption. Handle duplicates and uncertain outcomes. |
+| F20 | Scheduling and schedule management | Planned. Check timezone, DST, lead time, durable dispatch and cancel/replace/reconnect races. |
+| F21 | Cinema homepage and cross-device polish | Planned. Verify hero motion, mobile layout, accessibility and real example playback. |
+| F22 | Internal acceptance and deployment | Planned. Verify two-user isolation, outage recovery, generation benchmarks and Meta test posts. Review deployment separately. |
 
 ### F02 verification · 28 November 2026
 
