@@ -4,10 +4,46 @@ This is the development ledger for the invite-only pilot. Update the relevant ro
 
 ## Feature delivery order
 
+The following sequence follows the F00–F22 backlog. Status reflects this checkout. The earlier pilot milestones and their evidence are preserved below.
+
+| Slice | Feature | Current evidence or next check |
+|---|---|---|
+| F00 | Local idea-to-video proof of concept | Local narrated water-cycle prototype and revised export recorded below. |
+| F01 | Next.js workspace, shared styles and navigation | Implemented and previously checked on desktop and mobile. |
+| F02 | MongoDB adapter, collection validation and initial indexes | Existing authentication adapter plus workspace schema setup. Verified locally below. |
+| F03 | Account admission and sessions | Authenticated feature verified against an isolated Atlas database. Only active invitations admit users. Revoked, unlisted and public signup checks passed. |
+| F04 | Sign-in, recovery and private routes | Password setup, sign-in, expiry, six anonymous redirects and sign-out verified against the production build. Email delivery still requires a verified sender. |
+| F05 | Personal project create, list, rename and delete APIs | Authenticated API verified against an isolated Atlas database. GET/POST /api/projects and GET/PATCH/DELETE /api/projects/:id passed two-owner isolation, pagination, validation, stale revision, soft deletion and idempotent creation checks. Production build passed. |
+| F06 | My videos library | Authenticated /videos library verified with isolated Atlas data and headless Edge. Mobile create/rename/delete dialogs, stage and empty filters, desktop 12-to-13 pagination, failed-list retry and production build passed. |
+| F07 | Idea draft persistence, autosave and conflicts | Browser-only notes exist. Server revisions and recovery remain. |
+| F08 | Idea and brainstorming UI | Basic notebook exists. Gemini suggestions and draft integration remain. |
+| F09 | Storyboard generation backend | Planned. Validate generated scenes and recover from provider failures. |
+| F10 | Combined storyboard and script review | Design only. Implement scene editing and narration review. |
+| F11 | Conversational revisions and approval | Planned. Bind approval to an exact revision. |
+| F12 | Private Cloudinary asset adapter and media access | Planned. Verify authenticated upload and read, owner-only access, expiring delivery and missing-asset handling in the existing Cloudinary account. |
+| F13 | Durable generation jobs | Planned. Verify retry, cancellation and duplicate delivery. |
+| F14 | Hosted rendering | Local water-cycle prototype exists. Hosted rendering remains. |
+| F15 | Video review, approval and download | Planned. Play real media, select and approve an exact version, and export it. |
+| F16 | Caption and video revisions | Planned. Rerender caption edits, route spoken changes to storyboard review and retain previous output. |
+| F17 | Personal preferences | Planned. Persist timezone and future-project voice without changing existing projects. |
+| F18 | Personal Instagram authorization | Planned. Verify callback, eligibility, reconnect, disconnect and owner isolation. |
+| F19 | Reviewed Post now flow | Planned. Confirm the exact asset, account and caption. Handle duplicates and uncertain outcomes. |
+| F20 | Scheduling and schedule management | Planned. Check timezone, DST, lead time, durable dispatch and cancel/replace/reconnect races. |
+| F21 | Cinema homepage and cross-device polish | Planned. Verify hero motion, mobile layout, accessibility and real example playback. |
+| F22 | Internal acceptance and deployment | Planned. Verify two-user isolation, outage recovery, generation benchmarks and Meta test posts. Review deployment separately. |
+
+### F02 verification · 28 November 2026
+
+Run `npm run db:setup` with MONGODB_URI set to the intended database. The command installs validators and indexes on pilotInvites, preferences and projects. On an isolated MongoDB 7 instance, setup passed twice, all three collections rejected missing required fields, duplicate preference owners were rejected and the owner-scoped project pagination index matched the design. Existing Atlas data was untouched. Apply setup before enabling persistent projects in a hosted deployment.
+
+## Earlier pilot milestones
+
+
 | Slice | Feature and completion condition | Status | Evidence or outstanding work |
 |---|---|---|---|
 | 01 | Run the Next.js workspace and navigate each destination on desktop, tablet and phone. | Complete | Production build, type check and browser navigation checks passed on 26 November 2026. |
-| 02 | Admit approved Google accounts, create individual workspaces, sign out and return to the original route. | Planned next | Better Auth and Atlas. Test one allowed and one refused account. |
+| 02 | Admit approved Google accounts, create individual workspaces, sign out and return to the original route. | Ready for pilot test | Google OAuth, Atlas admission and protected workspace routes implemented. Live Google consent and authenticated sign-out await the tester. |
+| 02b | Sign in with a chosen password and return to the same private workspace. | Ready for local pilot test | Production build and isolated Atlas round trip passed. See the password pilot entry below. |
 | 03 | Save projects and ideas per creator, list drafts, enforce ownership and resume the latest saved stage. | Planned | Replace browser-only notes with authenticated persistence. Check with two creators. |
 | 04 | Generate a validated, timed storyboard from notes and ask one clarification when needed. | Planned | Gemini planning and recoverable validation. |
 | 05 | Edit individual scenes, propose a conversational revision, compare, apply or discard and approve an exact revision. | Planned | Cover autosave failure and edit conflicts. |
@@ -25,7 +61,7 @@ This is the development ledger for the invite-only pilot. Update the relevant ro
 - Requirements and acceptance cases are in PRD.md. API_DESIGN.md, DATABASE_DESIGN.md and SYSTEM_DESIGN.md describe intended contracts.
 - The Stitch review and its responsive QA cover design prototypes. Track application checks independently.
 - The water-cycle narration, animation and revised scene were generated before application development. The workspace demo reuses that film.
-- Keep billing and public onboarding outside the pilot. The idea notebook is a freeform starting point. AI brainstorming is a separate scope decision.
+- Billing remains outside the pilot. Public email onboarding and AI brainstorming are now included in the delivery order above.
 
 ## Change history
 
@@ -60,3 +96,33 @@ Each link opens a separate design. Together they are the visual reference for th
 ## Version control
 
 The public repository is [Namaste-video-ai on GitHub](https://github.com/himanshusingh9391/Namaste-video-ai). The initial milestone includes the workspace scaffold, the local video prototype, design previews and project documents. Each subsequent completed step includes a status update, a scoped commit and a verified push.
+
+The dev branch starts at scaffold commit be1f4a5. Develop and verify milestones on dev. Promote a finalized release to main through a pull request after user approval.
+
+## 28 November 2026 · Authentication pilot
+
+Open http://localhost:3000/sign-in on the development computer. Continue with the invited Google account, open Overview, then choose Sign out in the sidebar or compact Menu. Reopen /dashboard to verify that sign-in is required again. The app uses verified Google email, an active Atlas invitation and a Better Auth session. Local notes use separate browser keys per owner.
+
+Verified the production build, Atlas ping and pilot invitation, sign-in page, redirects from all six private routes, Google authorization URL and registered callback, and the sign-out endpoint with an anonymous browser session. Live account consent, signed-in dashboard viewing and session invalidation await the tester. To start locally use npm run dev. Configure the server values listed in .env.example in .env.local and manage pilot membership with npm run invite -- grant or revoke followed by the email address.
+
+## 28 November 2026 · Email and password pilot
+
+Open http://localhost:3000/sign-in. An invited Google user can open Overview, choose **Add an email sign-in password**, and save a password of 12–128 characters. Sign out and sign in with the same email and chosen password to return to the same workspace. Opening a private link before sign-in returns the creator to that allowed destination. A direct sign-in opens Overview.
+
+For setup without Google, the pilot administrator runs `npm run password-link -- email@example.com` from the configured checkout for an active invitation. Deliver the printed single-use link privately to the verified owner of the invited email. It expires after 15 minutes and also works for password recovery. Opening it lets the creator choose their password. Completing this flow invalidates earlier sessions. The production app uses Better Auth and the MongoDB adapter for password hashes and sessions. Google credentials are optional for email sign-in.
+
+Verified the production build and TypeScript checks. Exercised setup, single-use token consumption, successful email sign-in, incorrect password rejection, dashboard access, the authenticated sign-in redirect and sign-out invalidation against an isolated temporary Atlas database. Verified the updated sign-in page on localhost:3000. The real creator's Google-to-password setup and interactive browser walkthrough remain for pilot review. Hosting remains pending.
+
+## Public email onboarding · F03–F04
+
+At /sign-in, choose **Create an account with email**. The server sends a single-use, 15-minute verification link through Resend. Confirming it establishes a verified Better Auth session. New accounts choose a password and return to sign-in. Existing password accounts open their dashboard. Workspace access and browser draft keys continue to use the authenticated owner. Explicitly revoked pilot accounts remain blocked.
+
+Configure RESEND_API_KEY and AUTH_EMAIL_FROM (a verified sender) in the server environment and restart. Set BETTER_AUTH_URL to the public HTTPS origin when deploying so recipients can open their links. The production build, including TypeScript and the new routes, passed. Real message delivery and a two-inbox registration walkthrough remain unverified because this checkout has no configured sending credentials. Hosted integration remains pending.
+
+## Approved-user admission and recovery checks
+
+Use npm run invite to provision access and /sign-in to enter. scripts/check-admission.mjs exercises the production server with an isolated test database. Verified successful password setup, token replay rejection, incorrect password, disabled accounts, expired session, logout, six private routes and inaccessible source media. The app production build and prototype TypeScript check passed. PROTOTYPE_STATUS.md records the three existing local exports. The 23-test suite referenced by the supplied baseline has not been identified in this checkout.
+
+## 28 November 2026 · Local videos route recovery
+
+The production server already running on port 3000 returned 404 for /videos while the current build manifest contained the route. Restarted that server against the current build. Verified /videos returns 307 to /sign-in?next=%2Fvideos for an anonymous visitor and /sign-in returns 200. Entry point is http://localhost:3000/videos. Restart npm run start after a production rebuild so the running process loads the new routes.

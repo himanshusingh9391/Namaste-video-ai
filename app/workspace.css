@@ -59,3 +59,15 @@ dialog::backdrop { background:#000a }
   .section-head { margin-bottom:20px }
   .block { margin-top:24px }
 }
+
+.entry { margin:0; max-width:none; min-height:100dvh; display:grid; place-items:center; padding:20px }
+.entry-card { width:min(460px,100%); border:1px solid var(--line); border-radius:20px; background:var(--panel); padding:clamp(24px,5vw,44px); display:grid; gap:18px }
+.entry-card h1 { font-size:40px }
+.entry-card .action { justify-content:center; margin:0 }
+.account { display:grid; gap:8px; padding:14px 8px; overflow-wrap:anywhere }
+.rail .account { margin-top:auto }
+.password-form, .password-form label { display:grid; gap:8px }
+.password-form { gap:16px }
+.password-form input { width:100%; min-width:0; padding:12px; color:inherit; background:var(--panel); border:1px solid var(--line); border-radius:8px; font:inherit }
+details.block summary { cursor:pointer }
+details.block .password-form { max-width:420px; margin-top:16px }
