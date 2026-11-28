@@ -21,9 +21,9 @@ function databaseClient() {
 export async function canAccess(email: string, verified: boolean) {
   if (!verified || !email) return false;
   const invite = await databaseClient().db().collection('pilotInvites').findOne(
-    { normalizedEmail: email.trim().toLowerCase(), status: 'revoked' }, { projection: { _id: 1 } }
+    { normalizedEmail: email.trim().toLowerCase(), status: 'active' }, { projection: { _id: 1 } }
   );
-  return !invite;
+  return Boolean(invite);
 }
 
 function createAuth() {
@@ -35,7 +35,9 @@ function createAuth() {
     database: mongodbAdapter(client.db(), { client }),
     emailAndPassword: { enabled: true, disableSignUp: true, requireEmailVerification: true, minPasswordLength: 12, revokeSessionsOnPasswordReset: true },
     rateLimit: { enabled: true },
-    plugins: [magicLink({ expiresIn: 900, storeToken: 'hashed', sendMagicLink: sendSetupEmail }), nextCookies()],
+    plugins: [magicLink({ expiresIn: 900, storeToken: 'hashed', async sendMagicLink(data) {
+      if (await canAccess(data.email, true)) await sendSetupEmail(data);
+    } }), nextCookies()],
     socialProviders: { google: {
       enabled: Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET),
       clientId: process.env.GOOGLE_CLIENT_ID!, clientSecret: process.env.GOOGLE_CLIENT_SECRET!,

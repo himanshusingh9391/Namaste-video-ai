@@ -11,8 +11,8 @@ The following sequence follows the F00–F22 backlog. Status reflects this check
 | F00 | Local idea-to-video proof of concept | Local narrated water-cycle prototype and revised export recorded below. |
 | F01 | Next.js workspace, shared styles and navigation | Implemented and previously checked on desktop and mobile. |
 | F02 | MongoDB adapter, collection validation and initial indexes | Existing authentication adapter plus workspace schema setup. Verified locally below. |
-| F03 | Account admission and sessions | Current implementation admits verified email accounts. The internal-only backlog calls for approved users, disabled-user checks and closed signup. |
-| F04 | Sign-in, recovery and private routes | Self-service setup UI and protected routes build locally. Real inbox delivery awaits sender configuration. |
+| F03 | Account admission and sessions | Authenticated feature verified against an isolated Atlas database. Only active invitations admit users. Revoked, unlisted and public signup checks passed. |
+| F04 | Sign-in, recovery and private routes | Password setup, sign-in, expiry, six anonymous redirects and sign-out verified against the production build. Email delivery still requires a verified sender. |
 | F05 | Personal project create, list, rename and delete APIs | Planned. Check two owners, revisions and pagination. |
 | F06 | My videos library | Planned. Connect real projects, filters, pagination and empty/error states. |
 | F07 | Idea draft persistence, autosave and conflicts | Browser-only notes exist. Server revisions and recovery remain. |
@@ -118,3 +118,7 @@ Verified the production build and TypeScript checks. Exercised setup, single-use
 At /sign-in, choose **Create an account with email**. The server sends a single-use, 15-minute verification link through Resend. Confirming it establishes a verified Better Auth session. New accounts choose a password and return to sign-in. Existing password accounts open their dashboard. Workspace access and browser draft keys continue to use the authenticated owner. Explicitly revoked pilot accounts remain blocked.
 
 Configure RESEND_API_KEY and AUTH_EMAIL_FROM (a verified sender) in the server environment and restart. Set BETTER_AUTH_URL to the public HTTPS origin when deploying so recipients can open their links. The production build, including TypeScript and the new routes, passed. Real message delivery and a two-inbox registration walkthrough remain unverified because this checkout has no configured sending credentials. Hosted integration remains pending.
+
+## Approved-user admission and recovery checks
+
+Use npm run invite to provision access and /sign-in to enter. scripts/check-admission.mjs exercises the production server with an isolated test database. Verified successful password setup, token replay rejection, incorrect password, disabled accounts, expired session, logout, six private routes and inaccessible source media. The app production build and prototype TypeScript check passed. PROTOTYPE_STATUS.md records the three existing local exports. The 23-test suite referenced by the supplied baseline has not been identified in this checkout.
