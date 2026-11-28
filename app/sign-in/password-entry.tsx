@@ -34,12 +34,12 @@ export function PasswordEntry({ next, ready }: { next: string; ready: boolean })
         }
         form.reset();
         setToken('');
-        setNotice('Password saved. Sign in with your invited email and new password.');
+        setNotice('Password saved. Sign in with your email and new password.');
       } else {
         const email = String(data.get('email')).trim().toLowerCase();
         const result = await authClient.signIn.email({ email, password });
         if (result.error) {
-          setError('Sign-in failed. Check your email, password and pilot invitation.');
+          setError('Sign-in failed. Check your email and password.');
           return;
         }
         window.location.replace(next);

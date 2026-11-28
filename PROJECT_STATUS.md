@@ -10,8 +10,8 @@ The following sequence follows the two supplied roadmap screenshots. Status refl
 |---|---|---|
 | F01 | Next.js workspace, shared styles and navigation | Implemented and previously checked on desktop and mobile. |
 | F02 | MongoDB adapter, collection validation and initial indexes | Existing authentication adapter plus workspace schema setup. Verified locally below. |
-| F03 | Account admission and sessions | Authenticated invite-only pilot implemented. Public inbox-verified admission requested. |
-| F04 | Sign-in, recovery and private routes | Pilot UI and guards implemented. Self-service emailed password setup remains. |
+| F03 | Account admission and sessions | Verified email accounts admitted. Explicit pilot revocations still block access. |
+| F04 | Sign-in, recovery and private routes | Self-service setup UI and protected routes build locally. Real inbox delivery awaits sender configuration. |
 | F05 | Personal project create, list, rename and delete APIs | Planned. Check two owners, revisions and pagination. |
 | F06 | My videos library | Planned. Connect real projects, filters, pagination and empty/error states. |
 | F07 | Idea draft persistence, autosave and conflicts | Browser-only notes exist. Server revisions and recovery remain. |
@@ -103,3 +103,9 @@ Open http://localhost:3000/sign-in. An invited Google user can open Overview, ch
 For setup without Google, the pilot administrator runs `npm run password-link -- email@example.com` from the configured checkout for an active invitation. Deliver the printed single-use link privately to the verified owner of the invited email. It expires after 15 minutes and also works for password recovery. Opening it lets the creator choose their password. Completing this flow invalidates earlier sessions. The production app uses Better Auth and the MongoDB adapter for password hashes and sessions. Google credentials are optional for email sign-in.
 
 Verified the production build and TypeScript checks. Exercised setup, single-use token consumption, successful email sign-in, incorrect password rejection, dashboard access, the authenticated sign-in redirect and sign-out invalidation against an isolated temporary Atlas database. Verified the updated sign-in page on localhost:3000. The real creator's Google-to-password setup and interactive browser walkthrough remain for pilot review. Hosting remains pending.
+
+## Public email onboarding · F03–F04
+
+At /sign-in, choose **Create an account with email**. The server sends a single-use, 15-minute verification link through Resend. Confirming it establishes a verified Better Auth session. New accounts choose a password and return to sign-in. Existing password accounts open their dashboard. Workspace access and browser draft keys continue to use the authenticated owner. Explicitly revoked pilot accounts remain blocked.
+
+Configure RESEND_API_KEY and AUTH_EMAIL_FROM (a verified sender) in the server environment and restart. Set BETTER_AUTH_URL to the public HTTPS origin when deploying so recipients can open their links. The production build, including TypeScript and the new routes, passed. Real message delivery and a two-inbox registration walkthrough remain unverified because this checkout has no configured sending credentials. Hosted integration remains pending.
