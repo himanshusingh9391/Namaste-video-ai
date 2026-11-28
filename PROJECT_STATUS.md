@@ -122,3 +122,7 @@ Configure RESEND_API_KEY and AUTH_EMAIL_FROM (a verified sender) in the server e
 ## Approved-user admission and recovery checks
 
 Use npm run invite to provision access and /sign-in to enter. scripts/check-admission.mjs exercises the production server with an isolated test database. Verified successful password setup, token replay rejection, incorrect password, disabled accounts, expired session, logout, six private routes and inaccessible source media. The app production build and prototype TypeScript check passed. PROTOTYPE_STATUS.md records the three existing local exports. The 23-test suite referenced by the supplied baseline has not been identified in this checkout.
+
+## 28 November 2026 · Local videos route recovery
+
+The production server already running on port 3000 returned 404 for /videos while the current build manifest contained the route. Restarted that server against the current build. Verified /videos returns 307 to /sign-in?next=%2Fvideos for an anonymous visitor and /sign-in returns 200. Entry point is http://localhost:3000/videos. Restart npm run start after a production rebuild so the running process loads the new routes.
