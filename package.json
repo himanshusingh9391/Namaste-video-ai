@@ -23,6 +23,7 @@
     "start": "next start --hostname 127.0.0.1",
     "typecheck": "tsc --noEmit",
     "invite": "node --env-file=.env.local scripts/pilot-invite.mjs",
-    "password-link": "node --env-file=.env.local scripts/password-link.mjs"
+    "password-link": "node --env-file=.env.local scripts/password-link.mjs",
+    "db:setup": "node --env-file-if-exists=.env.local scripts/setup-database.mjs"
   }
 }

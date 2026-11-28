@@ -4,6 +4,32 @@ This is the development ledger for the invite-only pilot. Update the relevant ro
 
 ## Feature delivery order
 
+The following sequence follows the two supplied roadmap screenshots. Status reflects this checkout. The earlier pilot milestones and their evidence are preserved below.
+
+| Slice | Feature | Current evidence or next check |
+|---|---|---|
+| F01 | Next.js workspace, shared styles and navigation | Implemented and previously checked on desktop and mobile. |
+| F02 | MongoDB adapter, collection validation and initial indexes | Existing authentication adapter plus workspace schema setup. Verified locally below. |
+| F03 | Account admission and sessions | Authenticated invite-only pilot implemented. Public inbox-verified admission requested. |
+| F04 | Sign-in, recovery and private routes | Pilot UI and guards implemented. Self-service emailed password setup remains. |
+| F05 | Personal project create, list, rename and delete APIs | Planned. Check two owners, revisions and pagination. |
+| F06 | My videos library | Planned. Connect real projects, filters, pagination and empty/error states. |
+| F07 | Idea draft persistence, autosave and conflicts | Browser-only notes exist. Server revisions and recovery remain. |
+| F08 | Idea and brainstorming UI | Basic notebook exists. Gemini suggestions and draft integration remain. |
+| F09 | Storyboard generation backend | Planned. Validate generated scenes and recover from provider failures. |
+| F10 | Combined storyboard and script review | Design only. Implement scene editing and narration review. |
+| F11 | Conversational revisions and approval | Planned. Bind approval to an exact revision. |
+| F12 | Private R2 storage and media access | Planned. Check ownership before private media delivery. |
+| F13 | Durable generation jobs | Planned. Verify retry, cancellation and duplicate delivery. |
+| F14 | Hosted rendering | Local water-cycle prototype exists. Hosted rendering remains. |
+
+### F02 verification · 28 November 2026
+
+Run `npm run db:setup` with MONGODB_URI set to the intended database. The command installs validators and indexes on pilotInvites, preferences and projects. On an isolated MongoDB 7 instance, setup passed twice, all three collections rejected missing required fields, duplicate preference owners were rejected and the owner-scoped project pagination index matched the design. Existing Atlas data was untouched. Apply setup before enabling persistent projects in a hosted deployment.
+
+## Earlier pilot milestones
+
+
 | Slice | Feature and completion condition | Status | Evidence or outstanding work |
 |---|---|---|---|
 | 01 | Run the Next.js workspace and navigate each destination on desktop, tablet and phone. | Complete | Production build, type check and browser navigation checks passed on 26 November 2026. |
@@ -26,7 +52,7 @@ This is the development ledger for the invite-only pilot. Update the relevant ro
 - Requirements and acceptance cases are in PRD.md. API_DESIGN.md, DATABASE_DESIGN.md and SYSTEM_DESIGN.md describe intended contracts.
 - The Stitch review and its responsive QA cover design prototypes. Track application checks independently.
 - The water-cycle narration, animation and revised scene were generated before application development. The workspace demo reuses that film.
-- Keep billing and public onboarding outside the pilot. The idea notebook is a freeform starting point. AI brainstorming is a separate scope decision.
+- Billing remains outside the pilot. Public email onboarding and AI brainstorming are now included in the delivery order above.
 
 ## Change history
 
