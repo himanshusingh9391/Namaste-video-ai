@@ -1,8 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { OwnerContext } from './workspace-shell';
+import { useContext, useEffect, useState } from 'react';
 
-export function DraftField({ storageKey, label, example }: { storageKey: string; label: string; example: string }) {
+export function DraftField({ storageKey: fieldKey, label, example }: { storageKey: string; label: string; example: string }) {
+  const owner = useContext(OwnerContext);
+  const storageKey = fieldKey + ':' + owner;
   const [text, setText] = useState('');
   const [status, setStatus] = useState('Opening draft…');
   const [ready, setReady] = useState(false);

@@ -7,7 +7,7 @@ This is the development ledger for the invite-only pilot. Update the relevant ro
 | Slice | Feature and completion condition | Status | Evidence or outstanding work |
 |---|---|---|---|
 | 01 | Run the Next.js workspace and navigate each destination on desktop, tablet and phone. | Complete | Production build, type check and browser navigation checks passed on 26 November 2026. |
-| 02 | Admit approved Google accounts, create individual workspaces, sign out and return to the original route. | Planned next | Better Auth and Atlas. Test one allowed and one refused account. |
+| 02 | Admit approved Google accounts, create individual workspaces, sign out and return to the original route. | Ready for pilot test | Google OAuth, Atlas admission and protected workspace routes implemented. Live Google consent and authenticated sign-out await the tester. |
 | 03 | Save projects and ideas per creator, list drafts, enforce ownership and resume the latest saved stage. | Planned | Replace browser-only notes with authenticated persistence. Check with two creators. |
 | 04 | Generate a validated, timed storyboard from notes and ask one clarification when needed. | Planned | Gemini planning and recoverable validation. |
 | 05 | Edit individual scenes, propose a conversational revision, compare, apply or discard and approve an exact revision. | Planned | Cover autosave failure and edit conflicts. |
@@ -62,3 +62,9 @@ Each link opens a separate design. Together they are the visual reference for th
 The public repository is [Namaste-video-ai on GitHub](https://github.com/himanshusingh9391/Namaste-video-ai). The initial milestone includes the workspace scaffold, the local video prototype, design previews and project documents. Each subsequent completed step includes a status update, a scoped commit and a verified push.
 
 The dev branch starts at scaffold commit be1f4a5. Develop and verify milestones on dev. Promote a finalized release to main through a pull request after user approval.
+
+## 28 November 2026 · Authentication pilot
+
+Open http://localhost:3000/sign-in on the development computer. Continue with the invited Google account, open Overview, then choose Sign out in the sidebar or compact Menu. Reopen /dashboard to verify that sign-in is required again. The app uses verified Google email, an active Atlas invitation and a Better Auth session. Local notes use separate browser keys per owner.
+
+Verified the production build, Atlas ping and pilot invitation, sign-in page, redirects from all six private routes, Google authorization URL and registered callback, and the sign-out endpoint with an anonymous browser session. Live account consent, signed-in dashboard viewing and session invalidation await the tester. To start locally use npm run dev. Configure the server values listed in .env.example in .env.local and manage pilot membership with npm run invite -- grant or revoke followed by the email address.
