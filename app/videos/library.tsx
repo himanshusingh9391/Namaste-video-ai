@@ -1,5 +1,6 @@
 'use client';
 
+import { IdeaEditor } from './idea-editor';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 type Project = { id: string; title: string; draftVersion: number; lastStage: string };
@@ -81,7 +82,7 @@ export function Library() {
       </select></label>
       {items.map(project => <article className="block" key={project.id}><h2>{project.title}</h2><p>{project.lastStage}</p>
         <button onClick={()=>open('rename',project)}>Rename</button> <button onClick={()=>open('delete',project)}>Delete</button>
-      </article>)}
+      <IdeaEditor id={project.id}/></article>)}
       {busy && <p role="status">Loading projects…</p>}
       {error && <p role="alert">{error} <button onClick={()=>load(cursor ?? undefined)}>Retry</button></p>}
       {!busy && !error && !items.length && <p>{filter ? 'No projects at this stage.' : 'Your projects will appear here.'}</p>}

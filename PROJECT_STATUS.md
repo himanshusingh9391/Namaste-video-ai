@@ -15,7 +15,7 @@ The following sequence follows the F00–F22 backlog. Status reflects this check
 | F04 | Sign-in, recovery and private routes | Password setup, sign-in, expiry, six anonymous redirects and sign-out verified against the production build. Email delivery still requires a verified sender. |
 | F05 | Personal project create, list, rename and delete APIs | Authenticated API verified against an isolated Atlas database. GET/POST /api/projects and GET/PATCH/DELETE /api/projects/:id passed two-owner isolation, pagination, validation, stale revision, soft deletion and idempotent creation checks. Production build passed. |
 | F06 | My videos library | Authenticated /videos library verified with isolated Atlas data and headless Edge. Mobile create/rename/delete dialogs, stage and empty filters, desktop 12-to-13 pagination, failed-list retry and production build passed. |
-| F07 | Idea draft persistence, autosave and conflicts | Browser-only notes exist. Server revisions and recovery remain. |
+| F07 | Idea draft persistence, autosave and conflicts | Authenticated draft editor implemented in /videos → Edit idea. Topic, notes and voice persist with version checks. Two-owner API checks, stale edits, invalid input, browser reload, failed-save retention and retry passed. |
 | F08 | Idea and brainstorming UI | Basic notebook exists. Gemini suggestions and draft integration remain. |
 | F09 | Storyboard generation backend | Planned. Validate generated scenes and recover from provider failures. |
 | F10 | Combined storyboard and script review | Design only. Implement scene editing and narration review. |
@@ -126,3 +126,7 @@ Use npm run invite to provision access and /sign-in to enter. scripts/check-admi
 ## 28 November 2026 · Local videos route recovery
 
 The production server already running on port 3000 returned 404 for /videos while the current build manifest contained the route. Restarted that server against the current build. Verified /videos returns 307 to /sign-in?next=%2Fvideos for an anonymous visitor and /sign-in returns 200. Entry point is http://localhost:3000/videos. Restart npm run start after a production rebuild so the running process loads the new routes.
+
+## F07 · Persisted idea drafts
+
+Open My videos and expand Edit idea on a project. Edits save after a short pause. Failed saves preserve the current input, and stale versions require reviewing the saved draft. Existing project records use their title as the initial topic. Verified the production build and isolated Atlas API checks for ownership, persistence, invalid input and revision conflicts. Headless Edge checks covered mobile editing, reload persistence, retained input after a simulated 503, retry and the existing library controls. Voice selection previews and Gemini brainstorming remain F08.

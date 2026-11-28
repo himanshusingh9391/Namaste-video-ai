@@ -20,6 +20,15 @@ export async function checkProjects(base, first, second) {
   assert.equal(next.items[0].id,id);
   assert.equal(next.nextCursor,null);
   assert.deepEqual((await (await request('GET','',second)).json()).items,[]);
+  const draftProject=await (await create('Draft','draft')).json();
+  const draftPath='/'+draftProject.id+'/draft';
+  const draft={topic:'Rain',notes:'Clouds form',voiceId:'daniel'};
+  assert.equal((await request('PATCH',draftPath,second,{draft,expectedVersion:1})).status,404);
+  assert.equal((await request('PATCH',draftPath,first,{draft,expectedVersion:1})).status,200);
+  assert.equal((await request('PATCH',draftPath,first,{draft,expectedVersion:1})).status,409);
+  assert.deepEqual((await (await request('GET','/'+draftProject.id,first)).json()).draft,{...draft,scenes:[]});
+  assert.equal((await request('PATCH',draftPath,first,{draft:{...draft,notes:42},expectedVersion:2})).status,422);
+  assert.equal((await request('DELETE','/'+draftProject.id,first,{expectedVersion:2})).status,204);
   const path = '/'+id;
   for (const method of ['GET','PATCH','DELETE']) {
     assert.equal((await request(method,path,second,method==='GET'?undefined:{title:'Other',expectedVersion:1})).status,404);
